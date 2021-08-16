@@ -3,11 +3,11 @@
     {
       "binaryDir": "build",
       "cacheVariables": {
-        "BSA_BUILD_DOCS": {
+        "BETHUTIL-BSA_BUILD_DOCS": {
           "type": "BOOL",
           "value": "ON"
         },
-        "BSA_BUILD_EXAMPLES": {
+        "BBETHUTIL-SA_BUILD_EXAMPLES": {
           "type": "BOOL",
           "value": "ON"
         },
@@ -31,10 +31,6 @@
         "CMAKE_TOOLCHAIN_FILE": {
           "type": "STRING",
           "value": "$env{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake"
-        },
-        "VCPKG_MANIFEST_FEATURES": {
-          "type": "STRING",
-          "value": "tests"
         }
       },
       "hidden": true,
