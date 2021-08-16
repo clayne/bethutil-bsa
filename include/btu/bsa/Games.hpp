@@ -230,4 +230,4 @@ inline bool AllowedPath::check(const fs::path &filepath, const fs::path &root) c
     return true;
 }
 
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

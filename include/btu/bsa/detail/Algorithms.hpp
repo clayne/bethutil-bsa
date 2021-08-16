@@ -121,4 +121,4 @@ inline std::filesystem::path to_lower(std::filesystem::path const &path)
     return to_lower<std::filesystem::path::string_type::value_type>(path.native());
 }
 
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

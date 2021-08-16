@@ -46,4 +46,4 @@ inline FileTypes getFileType(path const &filepath, path const &root, GameSetting
     return FileTypes::Blacklist;
 }
 
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

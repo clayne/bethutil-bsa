@@ -187,4 +187,4 @@ void makeDummyPlugins(const fs::path &folderPath, GameSettings const &sets)
     }
 }
 
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

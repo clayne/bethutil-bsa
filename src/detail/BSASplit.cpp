@@ -69,4 +69,4 @@ std::vector<BSA> splitBSA(path const &dir,
     return cleanBSAs;
 }
 
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

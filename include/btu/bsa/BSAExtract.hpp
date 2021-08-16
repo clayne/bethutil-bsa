@@ -46,4 +46,4 @@ inline void extractAll(path const &dirPath, GameSettings const &sets)
     erase_if(files, [&sets](auto const &file) { return file.path().extension() != sets.extension; });
     std::for_each(files.begin(), files.end(), [](auto const &file) { btu::bsa::extract(file.path()); });
 }
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

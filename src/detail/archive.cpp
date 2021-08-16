@@ -271,4 +271,4 @@ const underlying_archive &archive::get_archive() const noexcept
 {
     return _archive;
 }
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

@@ -44,4 +44,4 @@ inline void create(path const &dir, BSA bsa, bool allowCompression, GameSettings
     arch.write(bsa.path_);
 }
 
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

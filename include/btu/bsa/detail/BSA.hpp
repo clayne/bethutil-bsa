@@ -43,4 +43,4 @@ struct BSA
     //! \brief Merges BSAs when possible, according to their max size
     static void mergeBSAs(std::vector<BSA> &list, bool merge);
 };
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

@@ -40,4 +40,4 @@ FilePath findBSAName(path const &folderPath, GameSettings const &sets, BSAType t
 
 void cleanDummyPlugins(path const &folderPath, GameSettings const &sets);
 void makeDummyPlugins(path const &folderPath, GameSettings const &sets);
-} // namespace BethUtil::BSA
+} // namespace btu::bsa

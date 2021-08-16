@@ -18,4 +18,4 @@ std::vector<BSA> splitBSA(path const &dir,
                           bool compactBSA,
                           GameSettings const &sets,
                           AllowFilePred const &allowFile = isAllowedPath);
-} // namespace BethUtil::BSA
+} // namespace btu::bsa
