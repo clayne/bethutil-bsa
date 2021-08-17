@@ -1,6 +1,6 @@
 author = 'Edgar B'
 cpp = 20
-description = 'Utilities for Bethesda games'
+description = 'Utilities for Bethesda Game'
 github = 'Guekka/bethutil-bsa'
 license = [ 'MPL', 'https://github.com/Guekka/bethutil-bsa/blob/main/LICENSE' ]
 name = 'bethutil-bsa'
@@ -15,9 +15,6 @@ navbar = [ 'classes', 'namespaces' ]
 	'https://img.shields.io/codecov/c/github/Guekka/bethutil-bsa?logo=codecov&logoColor=white&style=flat-square',
 	'https://app.codecov.io/gh/Guekka/bethutil-bsa'
 ]
-
-[images]
-paths = [ '@DOCS_DIR@/images' ]
 
 [macros]
 'protected' = 'private'

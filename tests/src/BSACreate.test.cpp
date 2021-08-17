@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 G'k
+/* Copyright (C) 2021 Edgar B
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
@@ -54,11 +54,11 @@ void run(Func const &f, std::string const &name)
 
 TEST_CASE("Create BSA")
 {
-    auto sets = GameSettings::get(Games::SSE);
+    auto sets = Settings::get(Game::SSE);
     //cleanDummyPlugins(dir, sets);
     makeDummyPlugins(dir, sets);
-    run([] { create(dir, true, GameSettings::get(Games::SSE)); }, "create");
-    run([] { extractAll(dir, GameSettings::get(Games::SSE)); }, "extract");
+    run([] { create(dir, true, Settings::get(Game::SSE)); }, "create");
+    run([] { extractAll(dir, Settings::get(Game::SSE)); }, "extract");
     run(
         [] {
             libbsarch::bsa bsa;
@@ -66,7 +66,7 @@ TEST_CASE("Create BSA")
                 R"(E:\Programmes\Mod_Skyrim_SE\Cathedral Assets Optimizer\TESTS\TES5_TO_SSE\BSACreation\INPUT - Copy\Requiem.bsa)",
                 "out.bsa",
                 [](auto, auto data) { return libbsarch::to_vector(std::move(data)); },
-                GameSettings::get(Games::SSE));
+                Settings::get(Game::SSE));
         },
         "transform");
 }

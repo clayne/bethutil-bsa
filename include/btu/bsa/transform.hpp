@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 G'k
+/* Copyright (C) 2021 Edgar B
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
@@ -6,18 +6,18 @@
 #pragma once
 
 /*
-#include "Games.hpp"
-#include "bsa.hpp"
+#include "archive_data.hpp"
 #include "common.hpp"
 #include "detail/BSACallback.hpp"
-#include "detail/Plugin.hpp"
+#include "detail/plugin.hpp"
+#include "detail/settings.hpp"
 #include "transform_archive.hpp"
 
 namespace BethUtil::BSA {
 inline void transform(path const& file,
                       path const& output,
                       libbsarch::transform_callback const& callback,
-                      GameSettings const& sets)
+                      Settings const& sets)
 {
     auto const path = FilePath::make(file, sets, FileTypes::BSA);
     auto format     = sets.format;

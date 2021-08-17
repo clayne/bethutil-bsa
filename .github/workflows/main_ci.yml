@@ -91,7 +91,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           fail_ci_if_error: true
-          files: bethutil-bsa/build/examples.json,@bethutil-template@/build/src.json
+          files: bethutil-bsa/build/examples.json,bethutil-bsa/build/src.json
           verbose: true
 
   windows:

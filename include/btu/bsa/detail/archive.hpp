@@ -1,5 +1,7 @@
 #pragma once
 
+#include "btu/bsa/detail/archive_type.hpp"
+
 #include <bsa/bsa.hpp>
 
 #include <functional>
@@ -7,18 +9,7 @@
 namespace libbsa = ::bsa;
 
 namespace btu::bsa {
-enum class version : std::uint32_t
-{
-    tes3  = 1,
-    tes4  = libbsa::detail::to_underlying(libbsa::tes4::version::tes4),
-    fo3   = libbsa::detail::to_underlying(libbsa::tes4::version::fo3),
-    tes5  = libbsa::detail::to_underlying(libbsa::tes4::version::tes5),
-    sse   = libbsa::detail::to_underlying(libbsa::tes4::version::sse),
-    fo4   = libbsa::detail::to_underlying(libbsa::fo4::format::general),
-    fo4dx = libbsa::detail::to_underlying(libbsa::fo4::format::directx),
-};
-
-using underlying_archive = std::variant<libbsa::tes3::archive, libbsa::tes4::archive, libbsa::fo4::archive>;
+using UnderlyingArchive = std::variant<libbsa::tes3::archive, libbsa::tes4::archive, libbsa::fo4::archive>;
 
 namespace detail {
 template<class... Ts>
@@ -49,33 +40,36 @@ template<class... Keys>
     return local;
 }
 
-[[nodiscard]] auto get_archive_identifier(underlying_archive archive) -> std::string_view;
+[[nodiscard]] auto get_archive_identifier(const UnderlyingArchive &archive) -> std::string_view;
 
 template<typename Version>
-[[nodiscard]] auto archive_version(underlying_archive archive, version a_version) -> Version;
+[[nodiscard]] auto archive_version(const UnderlyingArchive &archive, Version a_version) -> Version;
 } // namespace detail
 
-class archive
+class Archive
 {
 public:
-    archive(const std::filesystem::path &a_path); // Read
-    archive(version a_version, bool a_compressed);
+    Archive(const std::filesystem::path &a_path); // Read
+    Archive(ArchiveVersion a_version, bool a_compressed);
 
-    auto read(const std::filesystem::path &a_path) -> version;
+    auto read(const std::filesystem::path &a_path) -> ArchiveVersion;
     void write(std::filesystem::path a_path);
 
-    void add_file(const std::filesystem::path &a_root, const std::filesystem::path &a_path);
-    void add_file(const std::filesystem::path &a_relative, std::vector<std::byte> a_data);
+    size_t add_file(const std::filesystem::path &a_root, const std::filesystem::path &a_path);
+    size_t add_file(const std::filesystem::path &a_relative, std::vector<std::byte> a_data);
+
+    void merge(Archive other);
+    size_t decompress();
 
     using iteration_callback = std::function<void(const std::filesystem::path &, std::span<const std::byte>)>;
     void iterate_files(const iteration_callback &a_callback, bool skip_compressed = false);
 
-    version get_version() const noexcept;
-    const underlying_archive &get_archive() const noexcept;
+    ArchiveVersion get_version() const noexcept;
+    const UnderlyingArchive &get_archive() const noexcept;
 
 private:
-    underlying_archive _archive;
-    version _version;
+    UnderlyingArchive _archive;
+    ArchiveVersion _version;
     bool _compressed;
 };
 

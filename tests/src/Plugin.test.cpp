@@ -1,4 +1,4 @@
-/* Copyright (C) 2021 G'k
+/* Copyright (C) 2021 Edgar B
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
@@ -10,7 +10,7 @@ TEST_CASE("Plugin names are correctly parsed")
 {
     SUBCASE("Simple (SSE)")
     {
-        auto sets = GameSettings::get(Games::SSE);
+        auto sets = Settings::get(Game::SSE);
 
         REQUIRE_FALSE(FilePath::make("", sets, FileTypes::Plugin).has_value());
         auto plug = FilePath::make("C:/SomeDir/Requiem.esp", sets, FileTypes::Plugin);
@@ -22,7 +22,7 @@ TEST_CASE("Plugin names are correctly parsed")
     }
     SUBCASE("Complex (SSE)")
     {
-        auto sets = GameSettings::get(Games::SSE);
+        auto sets = Settings::get(Game::SSE);
 
         auto plug  = FilePath::make("C:/SomeDir/Requiem - Textures01.bsa", sets, FileTypes::BSA);
         auto plug2 = FilePath::make("C:/SomeDir/Requiem01 - Textures.bsa", sets, FileTypes::BSA);
@@ -36,7 +36,7 @@ TEST_CASE("Plugin names are correctly parsed")
     }
     SUBCASE("Complex 2 (SSE)")
     {
-        auto sets = GameSettings::get(Games::SSE);
+        auto sets = Settings::get(Game::SSE);
         auto plug = FilePath::make("C:/AnotherSomeDir/Requiem01 - Enhancement - Textures.bsa",
                                    sets,
                                    FileTypes::BSA);
@@ -50,7 +50,7 @@ TEST_CASE("Plugin names are correctly parsed")
     }
     SUBCASE("Complex 3 (SSE)")
     {
-        auto sets = GameSettings::get(Games::SSE);
+        auto sets = Settings::get(Game::SSE);
         auto plug = FilePath::make("C:/AnotherSomeDir/Requiem - Enhancement01.bsa", sets, FileTypes::BSA);
 
         REQUIRE(plug.has_value());

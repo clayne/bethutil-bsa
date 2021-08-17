@@ -16,7 +16,7 @@ namespace detail {
     return data;
 }
 
-[[nodiscard]] auto get_archive_identifier(underlying_archive archive) -> std::string_view
+[[nodiscard]] auto get_archive_identifier(const UnderlyingArchive &archive) -> std::string_view
 {
     const auto visiter = detail::overload{
         [](libbsa::tes3::archive) { return "tes3"; },
@@ -26,28 +26,28 @@ namespace detail {
     return std::visit(visiter, archive);
 }
 
-template<typename Version>
-[[nodiscard]] auto archive_version(underlying_archive archive, version a_version) -> Version
+template<typename VersionType>
+[[nodiscard]] auto archive_version(const UnderlyingArchive &archive, ArchiveVersion a_version) -> VersionType
 {
     const bool correct = [&] {
         switch (a_version)
         {
-            case version::tes3:
+            case ArchiveVersion::tes3:
             {
-                const bool same = std::same_as<Version, std::uint32_t>;
+                const bool same = std::same_as<VersionType, std::uint32_t>;
                 return same && std::holds_alternative<libbsa::tes3::archive>(archive);
             }
-            case version::tes4:
-            case version::fo3:
-            case version::sse:
+            case ArchiveVersion::tes4:
+            case ArchiveVersion::fo3:
+            case ArchiveVersion::sse:
             {
-                const bool same = std::same_as<Version, libbsa::tes4::version>;
+                const bool same = std::same_as<VersionType, libbsa::tes4::version>;
                 return same && std::holds_alternative<libbsa::tes4::archive>(archive);
             }
-            case version::fo4:
-            case version::fo4dx:
+            case ArchiveVersion::fo4:
+            case ArchiveVersion::fo4dx:
             {
-                const bool same = std::same_as<Version, libbsa::fo4::format>;
+                const bool same = std::same_as<VersionType, libbsa::fo4::format>;
                 return same && std::holds_alternative<libbsa::fo4::archive>(archive);
             }
             default: return false;
@@ -59,30 +59,31 @@ template<typename Version>
         throw std::runtime_error("Mismatch between requested version and variant type");
     }
 
-    return static_cast<Version>(libbsa::detail::to_underlying(a_version));
+    return static_cast<VersionType>(libbsa::detail::to_underlying(a_version));
 }
 
-template std::uint32_t archive_version<std::uint32_t>(underlying_archive, version);
-template libbsa::tes4::version archive_version<libbsa::tes4::version>(underlying_archive, version);
-template libbsa::fo4::format archive_version<libbsa::fo4::format>(underlying_archive, version);
+template std::uint32_t archive_version<std::uint32_t>(const UnderlyingArchive &, ArchiveVersion);
+template libbsa::tes4::version archive_version<libbsa::tes4::version>(const UnderlyingArchive &,
+                                                                      ArchiveVersion);
+template libbsa::fo4::format archive_version<libbsa::fo4::format>(const UnderlyingArchive &, ArchiveVersion);
 
 } // namespace detail
 
-archive::archive(const std::filesystem::path &a_path)
+Archive::Archive(const std::filesystem::path &a_path)
 {
     read(a_path);
 }
 
-archive::archive(version a_version, bool a_compressed)
+Archive::Archive(ArchiveVersion a_version, bool a_compressed)
     : _version(a_version)
     , _compressed(a_compressed)
 {
     switch (_version)
     {
-        case version::tes3: _archive = libbsa::tes3::archive{}; break;
-        case version::tes4:
-        case version::fo3:
-        case version::sse:
+        case ArchiveVersion::tes3: _archive = libbsa::tes3::archive{}; break;
+        case ArchiveVersion::tes4:
+        case ArchiveVersion::fo3:
+        case ArchiveVersion::sse:
         {
             libbsa::tes4::archive bsa;
             auto flags = libbsa::tes4::archive_flag::directory_strings
@@ -95,19 +96,19 @@ archive::archive(version a_version, bool a_compressed)
             _archive = std::move(bsa);
             break;
         }
-        case version::fo4:
-        case version::fo4dx: _archive = libbsa::fo4::archive{};
+        case ArchiveVersion::fo4:
+        case ArchiveVersion::fo4dx: _archive = libbsa::fo4::archive{};
     }
 }
 
-auto archive::read(const std::filesystem::path &a_path) -> version
+auto Archive::read(const std::filesystem::path &a_path) -> ArchiveVersion
 {
     const auto format = libbsa::guess_file_format(a_path).value();
 
     const auto read = [this, &a_path](auto archive) {
         auto format = archive.read(std::move(a_path));
         _archive    = std::move(archive);
-        return static_cast<version>(format);
+        return static_cast<ArchiveVersion>(format);
     };
 
     _version = [&] {
@@ -119,20 +120,20 @@ auto archive::read(const std::filesystem::path &a_path) -> version
                 libbsa::tes3::archive archive;
                 archive.read(std::move(a_path));
                 _archive = std::move(archive);
-                return version::tes3;
+                return ArchiveVersion::tes3;
             }
             case libbsa::file_format::tes4: return read(libbsa::tes4::archive{});
             default: libbsa::detail::declare_unreachable();
         }
     }();
-    if (_version == version::fo4dx)
+    if (_version == ArchiveVersion::fo4dx)
     {
         throw std::runtime_error("unsupported fo4 archive format");
     }
     return _version;
 }
 
-void archive::write(std::filesystem::path a_path)
+void Archive::write(std::filesystem::path a_path)
 {
     const auto writer = detail::overload{
         [&](libbsa::tes3::archive &bsa) { bsa.write(a_path); },
@@ -149,21 +150,24 @@ void archive::write(std::filesystem::path a_path)
     std::visit(writer, _archive);
 }
 
-void archive::add_file(const std::filesystem::path &a_root, const std::filesystem::path &a_path)
+size_t Archive::add_file(const std::filesystem::path &a_root, const std::filesystem::path &a_path)
 {
     const auto relative = a_path.lexically_relative(a_root).lexically_normal();
     const auto data     = detail::read_file(a_path);
-    add_file(relative, data);
+    return add_file(relative, data);
 }
 
-void archive::add_file(const std::filesystem::path &a_relative, std::vector<std::byte> a_data)
+size_t Archive::add_file(const std::filesystem::path &a_relative, std::vector<std::byte> a_data)
 {
     const auto adder = detail::overload{
         [&](libbsa::tes3::archive &bsa) {
             libbsa::tes3::file f;
+
+            auto ret = a_data.size();
             f.set_data(std::move(a_data));
 
             bsa.insert(a_relative.lexically_normal().generic_string(), std::move(f));
+            return ret;
         },
         [&, this](libbsa::tes4::archive &bsa) {
             libbsa::tes4::file f;
@@ -182,7 +186,9 @@ void archive::add_file(const std::filesystem::path &a_relative, std::vector<std:
                 return bsa[key];
             }();
 
+            auto ret = f.size();
             d->insert(a_relative.filename().lexically_normal().generic_string(), std::move(f));
+            return ret;
         },
         [&, this](libbsa::fo4::archive &ba2) {
             assert(detail::archive_version<libbsa::fo4::format>(_archive, _version)
@@ -195,14 +201,94 @@ void archive::add_file(const std::filesystem::path &a_relative, std::vector<std:
             if (_compressed)
                 chunk.compress();
 
+            auto ret = chunk.size();
             ba2.insert(a_relative.lexically_normal().generic_string(), std::move(f));
+            return ret;
         },
     };
 
-    std::visit(adder, _archive);
+    return std::visit(adder, _archive);
 }
 
-void archive::iterate_files(const iteration_callback &a_callback, bool skip_compressed)
+void Archive::merge(Archive other)
+{
+    auto visiter = detail::overload{
+        [&](libbsa::tes3::archive &self, libbsa::tes3::archive &other) {
+            for (const auto &[key, file] : other)
+            {
+                self.insert(key, std::move(file));
+            }
+        },
+        [&](libbsa::tes4::archive &self, libbsa::tes4::archive &other) {
+            for (auto &dir : other)
+            {
+                const auto d = [&]() {
+                    if (self.find(dir.first) == self.end())
+                    {
+                        self.insert(dir.first, libbsa::tes4::directory{});
+                    }
+                    return self[dir.first];
+                }();
+
+                for (auto &file : dir.second)
+                {
+                    d->insert(file.first, std::move(file.second));
+                }
+            }
+            other.clear();
+        },
+        [&](libbsa::fo4::archive &self, libbsa::fo4::archive &other) {
+            for (auto &[key, file] : other)
+            {
+                self.insert(key, std::move(file));
+            }
+            other.clear();
+        },
+        [&](auto, auto) { throw std::runtime_error("Invalid archive merge"); },
+    };
+
+    assert(_archive.index() == other.get_archive().index());
+    std::visit(visiter, _archive, other._archive);
+}
+
+size_t Archive::decompress()
+{
+    if (!_compressed)
+        return 0;
+    _compressed = false;
+
+    auto visiter = detail::overload{
+        [](libbsa::tes3::archive &) { return size_t{}; },
+        [this](libbsa::tes4::archive &bsa) {
+            size_t size = 0;
+            for (auto &dir : bsa)
+            {
+                for (auto &file : dir.second)
+                {
+                    file.second.decompress(detail::archive_version<libbsa::tes4::version>(_archive, _version));
+                    size += file.second.size();
+                }
+            }
+            return size;
+        },
+        [](libbsa::fo4::archive &ba2) {
+            size_t size = 0;
+            for (auto &[key, file] : ba2)
+            {
+                for (auto &chunk : file)
+                {
+                    chunk.decompress();
+                    size += chunk.size();
+                }
+            }
+            return size;
+        },
+    };
+
+    return std::visit(visiter, _archive);
+}
+
+void Archive::iterate_files(const iteration_callback &a_callback, bool skip_compressed)
 {
     auto visiter = detail::overload{
         [&](libbsa::tes3::archive &bsa) {
@@ -262,12 +348,12 @@ void archive::iterate_files(const iteration_callback &a_callback, bool skip_comp
     std::visit(visiter, _archive);
 }
 
-version archive::get_version() const noexcept
+ArchiveVersion Archive::get_version() const noexcept
 {
     return _version;
 }
 
-const underlying_archive &archive::get_archive() const noexcept
+const UnderlyingArchive &Archive::get_archive() const noexcept
 {
     return _archive;
 }

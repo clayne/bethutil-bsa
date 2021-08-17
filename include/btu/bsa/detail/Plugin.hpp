@@ -1,43 +1,42 @@
-/* Copyright (C) 2021 G'k
+/* Copyright (C) 2021 Edgar B
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 #pragma once
 
-#include "BSAType.hpp"
-#include "FileTypes.hpp"
-#include "btu/bsa/Games.hpp"
+#include "archive_type.hpp"
+#include "btu/bsa/detail/settings.hpp"
 #include "common.hpp"
 
 namespace btu::bsa {
 class FilePath
 {
-    static inline const string suffixSeparator = bethutil_bsa_STR(" - ");
+    static inline const OsString suffixSeparator = bethutil_bsa_STR(" - ");
 
 public:
-    FilePath(path dir, string name, string suffix, path ext, FileTypes type);
-    static std::optional<FilePath> make(path const &path, GameSettings const &sets, FileTypes type);
+    FilePath(Path dir, OsString name, OsString suffix, Path ext, FileTypes type);
+    static std::optional<FilePath> make(Path const &path, Settings const &sets, FileTypes type);
 
-    path fullPath() const;
-    path fullName() const;
+    Path fullPath() const;
+    Path fullName() const;
 
-    path dir_;
-    string name_;
-    string suffix_;
-    path ext_;
+    Path dir_;
+    OsString name_;
+    OsString suffix_;
+    Path ext_;
     std::optional<uint8_t> counter_;
     FileTypes type_{};
 
 private:
-    static std::optional<int> eatDigits(string &str);
-    static string eatSuffix(string &str, const GameSettings &sets);
+    static std::optional<int> eatDigits(OsString &str);
+    static OsString eatSuffix(OsString &str, const Settings &sets);
 
     explicit FilePath() = default;
 };
 
-FilePath findBSAName(path const &folderPath, GameSettings const &sets, BSAType type);
+FilePath findBSAName(Path const &folderPath, Settings const &sets, ArchiveType type);
 
-void cleanDummyPlugins(path const &folderPath, GameSettings const &sets);
-void makeDummyPlugins(path const &folderPath, GameSettings const &sets);
+void cleanDummyPlugins(Path const &folderPath, Settings const &sets);
+void makeDummyPlugins(Path const &folderPath, Settings const &sets);
 } // namespace btu::bsa

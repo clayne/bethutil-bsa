@@ -1,16 +1,16 @@
-/* Copyright (C) 2021 G'k
+/* Copyright (C) 2021 Edgar B
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-#include "btu/bsa/detail/Plugin.hpp"
+#include "btu/bsa/detail/plugin.hpp"
 
-#include "btu/bsa/detail/Algorithms.hpp"
+#include "btu/common/algorithms.hpp"
 
 #include <fstream>
 
 namespace btu::bsa {
-FilePath::FilePath(path dir, string name, string suffix, path ext, FileTypes type)
+FilePath::FilePath(Path dir, OsString name, OsString suffix, Path ext, FileTypes type)
     : dir_(std::move(dir))
     , name_(std::move(name))
     , suffix_(std::move(suffix))
@@ -19,14 +19,14 @@ FilePath::FilePath(path dir, string name, string suffix, path ext, FileTypes typ
 {
 }
 
-std::optional<FilePath> FilePath::make(path const &path, GameSettings const &sets, FileTypes type)
+std::optional<FilePath> FilePath::make(Path const &path, Settings const &sets, FileTypes type)
 {
     if (fs::is_directory(path))
         return std::nullopt;
 
     FilePath file(path.parent_path(), path.stem().native(), {}, path.extension(), type);
 
-    if (type == FileTypes::Plugin && !contains(sets.pluginExtensions, file.ext_))
+    if (type == FileTypes::Plugin && !common::contains(sets.pluginExtensions, file.ext_))
         return std::nullopt;
 
     if (type == FileTypes::BSA && file.ext_ != sets.extension)
@@ -48,12 +48,12 @@ fs::path FilePath::fullPath() const
 
 btu::bsa::fs::path FilePath::fullName() const
 {
-    auto const counter = path(counter_ ? std::to_string(*counter_) : "").native();
+    auto const counter = Path(counter_ ? std::to_string(*counter_) : "").native();
     auto const suffix  = suffix_.empty() ? bethutil_bsa_STR("") : suffixSeparator + suffix_;
-    return path(name_ + counter + suffix);
+    return Path(name_ + counter + suffix);
 }
 
-std::optional<int> FilePath::eatDigits(string &str)
+std::optional<int> FilePath::eatDigits(OsString &str)
 {
     size_t firstDigit = str.length() - 1;
     for (; isdigit(str[firstDigit]); --firstDigit)
@@ -69,11 +69,11 @@ std::optional<int> FilePath::eatDigits(string &str)
     return std::nullopt;
 }
 
-string FilePath::eatSuffix(string &str, GameSettings const &sets)
+OsString FilePath::eatSuffix(OsString &str, Settings const &sets)
 {
     auto suffixPos = str.rfind(suffixSeparator);
 
-    if (suffixPos == string::npos)
+    if (suffixPos == OsString::npos)
         return {};
 
     auto suffix = str.substr(suffixPos + suffixSeparator.length());
@@ -84,7 +84,7 @@ string FilePath::eatSuffix(string &str, GameSettings const &sets)
     return suffix;
 }
 
-std::vector<FilePath> listXHelper(path const &folderPath, GameSettings const &sets, FileTypes type)
+std::vector<FilePath> listXHelper(Path const &folderPath, Settings const &sets, FileTypes type)
 {
     std::vector<FilePath> res;
     for (auto const &f : fs::directory_iterator(folderPath))
@@ -94,37 +94,37 @@ std::vector<FilePath> listXHelper(path const &folderPath, GameSettings const &se
     return res;
 }
 
-bool isLoaded(FilePath const &bsa, GameSettings const &sets)
+bool isLoaded(FilePath const &bsa, Settings const &sets)
 {
     return std::any_of(sets.pluginExtensions.cbegin(), sets.pluginExtensions.cend(), [&bsa](auto const &ext) {
         auto b            = bsa;
         b.ext_            = ext;
         bool const exact  = fs::exists(b.fullPath());
-        b.suffix_         = string{};
+        b.suffix_         = OsString{};
         bool const approx = fs::exists(b.fullPath());
         return exact || approx;
     });
 }
 
-std::vector<FilePath> listPlugins(path const &folderPath, GameSettings const &sets)
+std::vector<FilePath> listPlugins(Path const &folderPath, Settings const &sets)
 {
     return listXHelper(folderPath, sets, FileTypes::Plugin);
 }
 
-std::vector<FilePath> listBSA(path const &folderPath, GameSettings const &sets)
+std::vector<FilePath> listBSA(Path const &folderPath, Settings const &sets)
 {
     return listXHelper(folderPath, sets, FileTypes::BSA);
 }
 
-FilePath findBSAName(path const &folderPath, GameSettings const &sets, BSAType type)
+FilePath findBSAName(Path const &folderPath, Settings const &sets, ArchiveType type)
 {
     std::vector<FilePath> plugins = listPlugins(folderPath, sets);
 
     if (plugins.empty())
         plugins.emplace_back(FilePath(folderPath, folderPath.filename(), {}, ".esp", FileTypes::Plugin));
 
-    path const suffix = [type, &sets] {
-        if (type == BSAType::Textures)
+    Path const suffix = [type, &sets] {
+        if (type == ArchiveType::Textures)
             return sets.textureSuffix.value();
         return sets.suffix.value_or("");
     }();
@@ -148,7 +148,7 @@ FilePath findBSAName(path const &folderPath, GameSettings const &sets, BSAType t
     throw std::runtime_error("No btu/bsa/plugin name found after 256 tries.");
 }
 
-void cleanDummyPlugins(const btu::bsa::fs::path &folderPath, GameSettings const &sets)
+void cleanDummyPlugins(const btu::bsa::fs::path &folderPath, Settings const &sets)
 {
     if (!sets.sDummyPlugin.has_value())
         return;
@@ -168,7 +168,7 @@ void cleanDummyPlugins(const btu::bsa::fs::path &folderPath, GameSettings const 
     }
 }
 
-void makeDummyPlugins(const fs::path &folderPath, GameSettings const &sets)
+void makeDummyPlugins(const fs::path &folderPath, Settings const &sets)
 {
     if (!sets.sDummyPlugin.has_value())
         return;
