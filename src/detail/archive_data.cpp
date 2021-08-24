@@ -15,9 +15,9 @@ ArchiveData::ArchiveData(const Settings &sets, ArchiveType type)
 {
 }
 
-Path ArchiveData::find_name(Path const &folder, Settings const &sets) const
+Path ArchiveData::find_name(const Path &folder, const Settings &sets) const
 {
-    return findBSAName(folder, sets, type_).fullPath();
+    return find_archive_name(folder, sets, type_).full_path();
 }
 
 bool ArchiveData::empty() const
@@ -25,12 +25,20 @@ bool ArchiveData::empty() const
     return files_size_ == 0;
 }
 
-bool ArchiveData::add_file(Path path)
+bool ArchiveData::add_file(Path path, std::optional<uintmax_t> size)
 {
-    if (files_size_ + fs::file_size(path) > max_size_)
+    const auto fsize = [&] {
+        if (size.has_value())
+            return size.value();
+        return fs::file_size(path);
+    }();
+
+    if (files_size_ + fsize > max_size_)
         return false;
 
-    files_size_ += fs::file_size(files_.emplace_back(std::move(path)));
+    files_.emplace_back(std::move(path));
+    files_size_ += fsize;
+
     return true;
 }
 

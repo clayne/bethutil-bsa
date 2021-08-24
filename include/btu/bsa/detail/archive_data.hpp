@@ -17,7 +17,7 @@ class ArchiveData
 public:
     ArchiveData(const Settings &sets, ArchiveType type);
 
-    bool add_file(Path path);
+    bool add_file(Path path, std::optional<uintmax_t> size = std::nullopt);
 
     ArchiveType get_type() const { return type_; }
     ArchiveVersion get_version() const { return version_; }
@@ -26,16 +26,16 @@ public:
     auto begin() { return files_.begin(); }
     auto end() { return files_.end(); }
 
-    Path find_name(Path const &folder, Settings const &sets) const;
+    Path find_name(const Path &folder, const Settings &sets) const;
 
-    uintmax_t files_size() { return files_size_; }
-    uintmax_t max_size() { return max_size_; }
-
-    //! \brief Merges BSAs when possible, according to their max size
-    static void mergeBSAs(std::vector<ArchiveData> &list, bool merge);
+    uintmax_t files_size() const { return files_size_; }
+    uintmax_t max_size() const { return max_size_; }
+    ArchiveType type() const { return type_; }
 
     ArchiveData &operator+=(const ArchiveData &other);
     ArchiveData operator+(ArchiveData const &other) const;
+
+    auto operator<=>(const ArchiveData &) const = default;
 
     static constexpr bool merge_different_types    = true;
     static constexpr bool separate_different_types = false;

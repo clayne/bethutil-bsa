@@ -53,12 +53,12 @@ enum class FileTypes
 
 struct AllowedPath
 {
-    static auto const inline root = Path("root");
+    static const auto inline root = Path("root");
 
     Path extension;
     std::vector<Path> directories;
 
-    bool check(Path const &filepath, Path const &root) const;
+    bool check(const Path &filepath, const Path &root) const;
 };
 
 struct Settings
@@ -82,7 +82,7 @@ struct Settings
     std::vector<AllowedPath> textureFiles;
     std::vector<AllowedPath> incompressibleFiles;
 
-    static Settings const &get(Game game);
+    static const Settings &get(Game game);
 };
 
 inline const Settings &Settings::get(Game game)
@@ -210,12 +210,12 @@ inline const Settings &Settings::get(Game game)
 
 inline bool AllowedPath::check(const Path &filepath, const Path &root) const
 {
-    auto const ext = filepath.extension().native();
+    const auto ext = filepath.extension().native();
     if (!common::str_compare<OsChar>(extension.native(), ext, false))
         return false;
 
-    auto const &relative = filepath.lexically_relative(root);
-    auto const dir       = [&relative] {
+    const auto &relative = filepath.lexically_relative(root);
+    const auto dir       = [&relative] {
         if (relative.empty())
             return AllowedPath::root;
         else
@@ -226,9 +226,9 @@ inline bool AllowedPath::check(const Path &filepath, const Path &root) const
     return true;
 }
 
-inline FileTypes get_filetype(Path const &filepath, Path const &root, Settings const &sets)
+inline FileTypes get_filetype(const Path &filepath, const Path &root, const Settings &sets)
 {
-    auto check = [ext = btu::common::to_lower(filepath.extension()), &filepath, &root](auto const &vec) {
+    auto check = [ext = btu::common::to_lower(filepath.extension()), &filepath, &root](const auto &vec) {
         using std::cbegin, std::cend;
         auto it = std::find_if(cbegin(vec), cend(vec), [&ext, &filepath, &root](auto &&val) {
             auto visiter = detail::overload{[&](const AllowedPath &p) { return p.check(filepath, root); },

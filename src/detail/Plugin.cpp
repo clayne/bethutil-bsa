@@ -19,7 +19,7 @@ FilePath::FilePath(Path dir, OsString name, OsString suffix, Path ext, FileTypes
 {
 }
 
-std::optional<FilePath> FilePath::make(Path const &path, Settings const &sets, FileTypes type)
+std::optional<FilePath> FilePath::make(const Path &path, const Settings &sets, FileTypes type)
 {
     if (fs::is_directory(path))
         return std::nullopt;
@@ -32,28 +32,28 @@ std::optional<FilePath> FilePath::make(Path const &path, Settings const &sets, F
     if (type == FileTypes::BSA && file.ext_ != sets.extension)
         return std::nullopt;
 
-    file.counter_ = eatDigits(file.name_);
-    file.suffix_  = eatSuffix(file.name_, sets);
+    file.counter_ = eat_digits(file.name_);
+    file.suffix_  = eat_suffix(file.name_, sets);
 
     if (!file.counter_.has_value())
-        file.counter_ = eatDigits(file.name_);
+        file.counter_ = eat_digits(file.name_);
 
     return file;
 }
 
-fs::path FilePath::fullPath() const
+fs::path FilePath::full_path() const
 {
-    return (dir_ / fullName()).replace_extension(ext_);
+    return (dir_ / full_name()).replace_extension(ext_);
 }
 
-btu::bsa::fs::path FilePath::fullName() const
+btu::bsa::fs::path FilePath::full_name() const
 {
-    auto const counter = Path(counter_ ? std::to_string(*counter_) : "").native();
-    auto const suffix  = suffix_.empty() ? bethutil_bsa_STR("") : suffixSeparator + suffix_;
+    const auto counter = Path(counter_ ? std::to_string(*counter_) : "").native();
+    const auto suffix  = suffix_.empty() ? BETHUTIL_BSA_STR("") : suffixSeparator + suffix_;
     return Path(name_ + counter + suffix);
 }
 
-std::optional<int> FilePath::eatDigits(OsString &str)
+std::optional<int> FilePath::eat_digits(OsString &str)
 {
     size_t firstDigit = str.length() - 1;
     for (; isdigit(str[firstDigit]); --firstDigit)
@@ -69,7 +69,7 @@ std::optional<int> FilePath::eatDigits(OsString &str)
     return std::nullopt;
 }
 
-OsString FilePath::eatSuffix(OsString &str, Settings const &sets)
+OsString FilePath::eat_suffix(OsString &str, const Settings &sets)
 {
     auto suffixPos = str.rfind(suffixSeparator);
 
@@ -84,46 +84,48 @@ OsString FilePath::eatSuffix(OsString &str, Settings const &sets)
     return suffix;
 }
 
-std::vector<FilePath> listXHelper(Path const &folderPath, Settings const &sets, FileTypes type)
+std::vector<FilePath> list_helper(const Path &folderPath, const Settings &sets, FileTypes type)
 {
     std::vector<FilePath> res;
-    for (auto const &f : fs::directory_iterator(folderPath))
+    for (const auto &f : fs::directory_iterator(folderPath))
         if (auto file = FilePath::make(f.path(), sets, type))
             res.emplace_back(*file);
 
     return res;
 }
 
-bool isLoaded(FilePath const &bsa, Settings const &sets)
+bool is_loaded(const FilePath &archive, const Settings &sets)
 {
-    return std::any_of(sets.pluginExtensions.cbegin(), sets.pluginExtensions.cend(), [&bsa](auto const &ext) {
-        auto b            = bsa;
-        b.ext_            = ext;
-        bool const exact  = fs::exists(b.fullPath());
-        b.suffix_         = OsString{};
-        bool const approx = fs::exists(b.fullPath());
-        return exact || approx;
-    });
+    return std::any_of(sets.pluginExtensions.cbegin(),
+                       sets.pluginExtensions.cend(),
+                       [&archive](const auto &ext) {
+                           auto b            = archive;
+                           b.ext_            = ext;
+                           bool const exact  = fs::exists(b.full_path());
+                           b.suffix_         = OsString{};
+                           bool const approx = fs::exists(b.full_path());
+                           return exact || approx;
+                       });
 }
 
-std::vector<FilePath> listPlugins(Path const &folderPath, Settings const &sets)
+std::vector<FilePath> list_plugins(const Path &folderPath, const Settings &sets)
 {
-    return listXHelper(folderPath, sets, FileTypes::Plugin);
+    return list_helper(folderPath, sets, FileTypes::Plugin);
 }
 
-std::vector<FilePath> listBSA(Path const &folderPath, Settings const &sets)
+std::vector<FilePath> list_archive(const Path &folderPath, const Settings &sets)
 {
-    return listXHelper(folderPath, sets, FileTypes::BSA);
+    return list_helper(folderPath, sets, FileTypes::BSA);
 }
 
-FilePath findBSAName(Path const &folderPath, Settings const &sets, ArchiveType type)
+FilePath find_archive_name(const Path &folderPath, const Settings &sets, ArchiveType type)
 {
-    std::vector<FilePath> plugins = listPlugins(folderPath, sets);
+    std::vector<FilePath> plugins = list_plugins(folderPath, sets);
 
     if (plugins.empty())
         plugins.emplace_back(FilePath(folderPath, folderPath.filename(), {}, ".esp", FileTypes::Plugin));
 
-    Path const suffix = [type, &sets] {
+    const Path suffix = [type, &sets] {
         if (type == ArchiveType::Textures)
             return sets.textureSuffix.value();
         return sets.suffix.value_or("");
@@ -132,7 +134,7 @@ FilePath findBSAName(Path const &folderPath, Settings const &sets, ArchiveType t
     auto checkPlugin = [&sets, &suffix](FilePath &file) {
         file.ext_    = sets.extension;
         file.suffix_ = suffix;
-        return !fs::exists(file.fullPath());
+        return !fs::exists(file.full_path());
     };
 
     for (auto &plugin : plugins)
@@ -148,18 +150,18 @@ FilePath findBSAName(Path const &folderPath, Settings const &sets, ArchiveType t
     throw std::runtime_error("No btu/bsa/plugin name found after 256 tries.");
 }
 
-void cleanDummyPlugins(const btu::bsa::fs::path &folderPath, Settings const &sets)
+void clean_dummy_plugins(const btu::bsa::fs::path &folderPath, const Settings &sets)
 {
     if (!sets.sDummyPlugin.has_value())
         return;
-    auto const &dummy = *sets.sDummyPlugin;
+    const auto &dummy = *sets.sDummyPlugin;
 
-    for (auto const &plug : listPlugins(folderPath, sets))
+    for (const auto &plug : list_plugins(folderPath, sets))
     {
-        auto const path = plug.fullPath();
+        const auto path = plug.full_path();
         std::fstream file(path, std::ios::binary | std::ios::in | std::ios::ate);
-        // It is safe to evaluate file size, as the embedded dummies are the smallest plugins possible
 
+        // It is safe to evaluate file size, as the embedded dummies are the smallest plugins possible
         if (file && file.tellg() == dummy.size())
         {
             file.close();
@@ -168,21 +170,21 @@ void cleanDummyPlugins(const btu::bsa::fs::path &folderPath, Settings const &set
     }
 }
 
-void makeDummyPlugins(const fs::path &folderPath, Settings const &sets)
+void make_dummy_plugins(const fs::path &folderPath, const Settings &sets)
 {
     if (!sets.sDummyPlugin.has_value())
         return;
 
-    for (auto &&bsa : listBSA(folderPath, sets))
+    for (auto &&bsa : list_archive(folderPath, sets))
     {
-        if (isLoaded(bsa, sets))
+        if (is_loaded(bsa, sets))
             continue;
 
         bsa.ext_    = sets.pluginExtensions.back();
         bsa.suffix_ = {};
-        std::ofstream dummy(bsa.fullPath(), std::ios::out | std::ios::binary);
+        std::ofstream dummy(bsa.full_path(), std::ios::out | std::ios::binary);
 
-        auto const dummyBytes = *sets.sDummyPlugin;
+        const auto dummyBytes = *sets.sDummyPlugin;
         dummy.write(reinterpret_cast<const char *>(dummyBytes.data()), dummyBytes.size());
     }
 }

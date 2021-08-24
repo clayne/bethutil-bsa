@@ -3,13 +3,10 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
-#include "btu/bsa/BSACreate.hpp"
+#include "btu/bsa/pack.hpp"
 
-#include "btu/bsa/BSAExtract.hpp"
-#include "btu/bsa/BSATransform.hpp"
-
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "utils.hpp"
+#include "btu/bsa/transform.hpp"
+#include "btu/bsa/unpack.hpp"
 
 #include <chrono>
 
@@ -28,7 +25,7 @@
  * Unglau MT Delphi : 1494s
 */
 
-#ifdef bethutil_bsa_INTERNAL_TEST
+#ifdef BETHUTIL_BSA_INTERNAL_TEST
 //const auto dir = R"(F:\Edgar\Downloads\unglaubliche Reise EXTENDED Version SSE DV 2.0 BSA)";
 const auto dir
     = R"(E:\Programmes\Mod_Skyrim_SE\Cathedral Assets Optimizer\TESTS\TES5_TO_SSE\BSACreation\INPUT - Copy)";
