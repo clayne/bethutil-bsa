@@ -165,7 +165,7 @@ inline const Settings &Settings::get(Game game)
             static Settings sets = [=] {
                 Settings s         = defaultSets;
                 s.game             = Game::FNV;
-                s.format           = ArchiveVersion::tes4;
+                s.format           = ArchiveVersion::tes5;
                 s.textureFormat    = std::nullopt;
                 sets.textureSuffix = std::nullopt;
                 s.pluginExtensions = {".esm", ".esp"};
