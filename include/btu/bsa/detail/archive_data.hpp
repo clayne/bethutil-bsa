@@ -56,8 +56,8 @@ private:
     Size get_file_size(const common::Path &path, std::optional<Size> override) const;
 
     Size size_{};
-    uintmax_t max_size_   = -1;
-    ArchiveType type_     = ArchiveType::Standard;
+    uintmax_t max_size_ = -1;
+    ArchiveType type_   = ArchiveType::Standard;
     ArchiveVersion version_{};
     std::vector<Path> files_;
 };
