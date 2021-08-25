@@ -12,12 +12,22 @@
 #include <vector>
 
 namespace btu::bsa {
+
 class ArchiveData
 {
 public:
     ArchiveData(const Settings &sets, ArchiveType type);
 
-    bool add_file(Path path, std::optional<uintmax_t> size = std::nullopt);
+    struct Size
+    {
+        uintmax_t compressed;
+        uintmax_t uncompressed;
+
+        auto operator<=>(const Size &) const = default;
+        Size &operator+=(const Size &other);
+    };
+
+    bool add_file(Path path, std::optional<Size> override = std::nullopt);
 
     ArchiveType get_type() const { return type_; }
     ArchiveVersion get_version() const { return version_; }
@@ -28,7 +38,7 @@ public:
 
     Path find_name(const Path &folder, const Settings &sets) const;
 
-    uintmax_t files_size() const { return files_size_; }
+    Size size() const { return size_; }
     uintmax_t max_size() const { return max_size_; }
     ArchiveType type() const { return type_; }
 
@@ -41,7 +51,11 @@ public:
     static constexpr bool separate_different_types = false;
 
 private:
-    uintmax_t files_size_ = 0;
+    static constexpr bool k_acurate_size_estimation = false;
+
+    Size get_file_size(const common::Path &path, std::optional<Size> override) const;
+
+    Size size_{};
     uintmax_t max_size_   = -1;
     ArchiveType type_     = ArchiveType::Standard;
     ArchiveVersion version_{};
