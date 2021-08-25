@@ -7,7 +7,7 @@
           "type": "BOOL",
           "value": "ON"
         },
-        "BBETHUTIL-SA_BUILD_EXAMPLES": {
+        "BETHUTIL-BSA_BUILD_EXAMPLES": {
           "type": "BOOL",
           "value": "ON"
         },
