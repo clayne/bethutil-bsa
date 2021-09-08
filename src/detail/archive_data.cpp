@@ -12,6 +12,7 @@ namespace btu::bsa {
 ArchiveData::ArchiveData(const Settings &sets, ArchiveType type)
     : max_size_(sets.maxSize)
     , type_(type)
+    , version_(sets.format)
 {
 }
 
