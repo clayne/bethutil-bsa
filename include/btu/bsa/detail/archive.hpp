@@ -5,6 +5,7 @@
 #include <bsa/bsa.hpp>
 
 #include <functional>
+#include <mutex>
 
 namespace libbsa = ::bsa;
 
@@ -66,6 +67,8 @@ public:
 
 private:
     UnderlyingArchive _archive;
+    std::mutex _mutex;
+
     ArchiveVersion _version;
     bool _compressed;
 };

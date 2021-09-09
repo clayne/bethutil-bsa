@@ -166,6 +166,8 @@ size_t Archive::add_file(const std::filesystem::path &a_relative, std::vector<st
             auto ret = a_data.size();
             f.set_data(std::move(a_data));
 
+            std::scoped_lock lock(_mutex);
+
             bsa.insert(a_relative.lexically_normal().generic_string(), std::move(f));
             return ret;
         },
@@ -177,6 +179,7 @@ size_t Archive::add_file(const std::filesystem::path &a_relative, std::vector<st
             if (_compressed)
                 f.compress(version);
 
+            std::scoped_lock lock(_mutex);
             const auto d = [&]() {
                 const auto key = a_relative.parent_path().lexically_normal().generic_string();
                 if (bsa.find(key) == bsa.end())
@@ -200,6 +203,8 @@ size_t Archive::add_file(const std::filesystem::path &a_relative, std::vector<st
 
             if (_compressed)
                 chunk.compress();
+
+            std::scoped_lock lock(_mutex);
 
             auto ret = chunk.size();
             ba2.insert(a_relative.lexically_normal().generic_string(), std::move(f));
