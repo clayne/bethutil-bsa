@@ -1,5 +1,6 @@
 #include "btu/bsa/detail/archive.hpp"
 
+#include <execution>
 #include <fstream>
 
 namespace btu::bsa {
@@ -219,18 +220,17 @@ void Archive::iterate_files(const iteration_callback &a_callback, bool skip_comp
 {
     auto visiter = detail::overload{
         [&](libbsa::tes3::archive &bsa) {
-            for (const auto &[key, file] : bsa)
-            {
-                const auto relative = detail::virtual_to_local_path(key);
-                const auto bytes    = file.as_bytes();
+            std::for_each(std::execution::par, bsa.cbegin(), bsa.cend(), [&](auto &&pair) {
+                const auto [key, file] = pair;
+                const auto relative    = detail::virtual_to_local_path(key);
+                const auto bytes       = file.as_bytes();
                 a_callback(relative, bytes);
-            }
+            });
         },
         [&](libbsa::tes4::archive &bsa) {
             for (auto &dir : bsa)
             {
-                for (auto &file : dir.second)
-                {
+                std::for_each(std::execution::par, dir.second.begin(), dir.second.end(), [&](auto &&file) {
                     const auto relative = detail::virtual_to_local_path(dir.first, file.first);
                     const auto ver      = detail::archive_version<libbsa::tes4::version>(_archive, _version);
 
@@ -238,17 +238,17 @@ void Archive::iterate_files(const iteration_callback &a_callback, bool skip_comp
                     {
                         if (skip_compressed)
                         {
-                            continue;
+                            return;
                         }
                         file.second.decompress(ver);
                     }
                     a_callback(relative, file.second.as_bytes());
-                }
+                });
             }
         },
         [&](libbsa::fo4::archive &ba2) {
-            for (auto &[key, file] : ba2)
-            {
+            std::for_each(std::execution::par, ba2.begin(), ba2.end(), [&](auto &&pair) {
+                auto &&[key, file]  = pair;
                 const auto relative = detail::virtual_to_local_path(key);
 
                 std::vector<std::byte> bytes;
@@ -258,7 +258,7 @@ void Archive::iterate_files(const iteration_callback &a_callback, bool skip_comp
                     {
                         if (skip_compressed)
                         {
-                            continue;
+                            return;
                         }
                         chunk.decompress();
                     }
@@ -268,7 +268,7 @@ void Archive::iterate_files(const iteration_callback &a_callback, bool skip_comp
                     bytes.insert(bytes.end(), chunk_bytes.begin(), chunk_bytes.end());
                 }
                 a_callback(relative, bytes);
-            }
+            });
         },
     };
 
