@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include "archive_type.hpp"
-#include "btu/bsa/detail/settings.hpp"
-#include "common.hpp"
+#include "btu/bsa/detail/archive_type.hpp"
+#include "btu/bsa/detail/common.hpp"
+#include "btu/bsa/settings.hpp"
 
 namespace btu::bsa {
 class FilePath

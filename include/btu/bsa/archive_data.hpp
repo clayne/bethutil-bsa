@@ -4,10 +4,10 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 #pragma once
 
-#include "archive_type.hpp"
-#include "btu/bsa/detail/settings.hpp"
-#include "common.hpp"
-#include "plugin.hpp"
+#include "btu/bsa/detail/archive_type.hpp"
+#include "btu/bsa/detail/common.hpp"
+#include "btu/bsa/plugin.hpp"
+#include "btu/bsa/settings.hpp"
 
 #include <vector>
 
