@@ -1,21 +1,11 @@
-#include "btu/bsa/detail/backends/archive.hpp"
+#include "btu/bsa/detail/backends/rsm_archive.hpp"
+
+#include "btu/bsa/detail/common.hpp"
 
 #include <execution>
 #include <fstream>
 
-namespace btu::bsa {
-namespace detail {
-[[nodiscard]] auto read_file(const std::filesystem::path &a_path) -> std::vector<std::byte>
-{
-    std::vector<std::byte> data;
-    data.resize(std::filesystem::file_size(a_path));
-
-    std::ifstream in{a_path, std::ios_base::in | std::ios_base::binary};
-    in.exceptions(std::ios_base::failbit);
-    in.read(reinterpret_cast<char *>(data.data()), static_cast<std::streamsize>(data.size()));
-
-    return data;
-}
+namespace btu::bsa::detail {
 
 [[nodiscard]] auto get_archive_identifier(const UnderlyingArchive &archive) -> std::string_view
 {
@@ -68,14 +58,12 @@ template libbsa::tes4::version archive_version<libbsa::tes4::version>(const Unde
                                                                       ArchiveVersion);
 template libbsa::fo4::format archive_version<libbsa::fo4::format>(const UnderlyingArchive &, ArchiveVersion);
 
-} // namespace detail
-
-Archive::Archive(const std::filesystem::path &a_path)
+RsmArchive::RsmArchive(const std::filesystem::path &a_path)
 {
     read(a_path);
 }
 
-Archive::Archive(ArchiveVersion a_version, bool a_compressed)
+RsmArchive::RsmArchive(ArchiveVersion a_version, bool a_compressed)
     : _version(a_version)
     , _compressed(a_compressed)
 {
@@ -102,7 +90,7 @@ Archive::Archive(ArchiveVersion a_version, bool a_compressed)
     }
 }
 
-auto Archive::read(const std::filesystem::path &a_path) -> ArchiveVersion
+auto RsmArchive::read(const std::filesystem::path &a_path) -> ArchiveVersion
 {
     const auto format = libbsa::guess_file_format(a_path).value();
 
@@ -134,7 +122,7 @@ auto Archive::read(const std::filesystem::path &a_path) -> ArchiveVersion
     return _version;
 }
 
-void Archive::write(std::filesystem::path a_path)
+void RsmArchive::write(std::filesystem::path a_path)
 {
     const auto writer = detail::overload{
         [&](libbsa::tes3::archive &bsa) { bsa.write(a_path); },
@@ -151,14 +139,14 @@ void Archive::write(std::filesystem::path a_path)
     std::visit(writer, _archive);
 }
 
-size_t Archive::add_file(const std::filesystem::path &a_root, const std::filesystem::path &a_path)
+size_t RsmArchive::add_file(const std::filesystem::path &a_root, const std::filesystem::path &a_path)
 {
     const auto relative = a_path.lexically_relative(a_root).lexically_normal();
     const auto data     = detail::read_file(a_path);
     return add_file(relative, data);
 }
 
-size_t Archive::add_file(const std::filesystem::path &a_relative, std::vector<std::byte> a_data)
+size_t RsmArchive::add_file(const std::filesystem::path &a_relative, std::vector<std::byte> a_data)
 {
     const auto adder = detail::overload{
         [&](libbsa::tes3::archive &bsa) {
@@ -216,7 +204,7 @@ size_t Archive::add_file(const std::filesystem::path &a_relative, std::vector<st
     return std::visit(adder, _archive);
 }
 
-void Archive::iterate_files(const iteration_callback &a_callback, bool skip_compressed)
+void RsmArchive::iterate_files(const iteration_callback &a_callback, bool skip_compressed)
 {
     auto visiter = detail::overload{
         [&](libbsa::tes3::archive &bsa) {
@@ -275,13 +263,13 @@ void Archive::iterate_files(const iteration_callback &a_callback, bool skip_comp
     std::visit(visiter, _archive);
 }
 
-ArchiveVersion Archive::get_version() const noexcept
+ArchiveVersion RsmArchive::get_version() const noexcept
 {
     return _version;
 }
 
-const UnderlyingArchive &Archive::get_archive() const noexcept
+const UnderlyingArchive &RsmArchive::get_archive() const noexcept
 {
     return _archive;
 }
-} // namespace btu::bsa
+} // namespace btu::bsa::detail
