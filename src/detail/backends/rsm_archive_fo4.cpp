@@ -375,132 +375,6 @@ struct SaveToDDSInfo
     bool fastpath;
 };
 
-_Use_decl_annotations_ SaveToDDSInfo SaveDDSInfo(std::span<DirectX::Image> images,
-                                                 const DirectX::TexMetadata &metadata)
-{
-    SaveToDDSInfo ret{.fastpath = true};
-
-    if (images.empty())
-        return {};
-
-    for (const auto &image : images)
-    {
-        if (!image.pixels)
-            return {};
-
-        if (image.format != metadata.format)
-            return {};
-
-        size_t ddsRowPitch, ddsSlicePitch;
-        const auto hr = ComputePitch(metadata.format,
-                                     image.width,
-                                     image.height,
-                                     ddsRowPitch,
-                                     ddsSlicePitch,
-                                     DirectX::CP_FLAGS_NONE);
-        if (FAILED(hr))
-            return {};
-
-        assert(images[i].rowPitch > 0);
-        assert(images[i].slicePitch > 0);
-
-        if ((image.rowPitch != ddsRowPitch) || (image.slicePitch != ddsSlicePitch))
-        {
-            ret.fastpath = false;
-        }
-
-        ret.required_size += ddsSlicePitch;
-    }
-
-    return ret;
-}
-
-// Customized version of https://github.com/microsoft/DirectXTex/blob/master/DirectXTex/DirectXTexDDS.cpp#L1983
-template<std::output_iterator<uint8_t> It>
-_Use_decl_annotations_ HRESULT SaveMips(const std::span<const DirectX::Image> images,
-                                        const DirectX::TexMetadata &metadata,
-                                        It out,
-                                        const SaveToDDSInfo info)
-{
-    const auto process_image =
-        [](bool fastpath, const DirectX::Image image, It &out, const DirectX::TexMetadata &metadata) {
-            if (fastpath)
-            {
-                const size_t pixsize = image.slicePitch;
-                out                  = std::copy(image.pixels, image.pixels + pixsize, out);
-            }
-            else
-            {
-                size_t ddsRowPitch, ddsSlicePitch;
-                const auto hr = ComputePitch(metadata.format,
-                                             image.width,
-                                             image.height,
-                                             ddsRowPitch,
-                                             ddsSlicePitch,
-                                             DirectX::CP_FLAGS_NONE);
-                if (FAILED(hr))
-                {
-                    return hr;
-                }
-
-                size_t rowPitch = image.rowPitch;
-
-                const uint8_t *__restrict sPtr = image.pixels;
-
-                size_t lines = DirectX::ComputeScanlines(metadata.format, image.height);
-                size_t csize = std::min<size_t>(rowPitch, ddsRowPitch);
-                for (size_t j = 0; j < lines; ++j)
-                {
-                    out = std::copy(sPtr, sPtr + csize, out);
-                    sPtr += rowPitch;
-                }
-            }
-            return S_OK;
-        };
-
-    switch (static_cast<DirectX::DDS_RESOURCE_DIMENSION>(metadata.dimension))
-    {
-        case DirectX::DDS_DIMENSION_TEXTURE1D:
-        case DirectX::DDS_DIMENSION_TEXTURE2D:
-        {
-            std::for_each(images.begin(), images.end(), [&](const auto &img) {
-                if (FAILED(process_image(info.fastpath, img, out, metadata)))
-                    throw false;
-            });
-        }
-        break;
-
-        case DirectX::DDS_DIMENSION_TEXTURE3D:
-        {
-            if (metadata.arraySize != 1)
-            {
-                return E_FAIL;
-            }
-
-            size_t d = metadata.depth;
-
-            size_t index = 0;
-            for (size_t level = 0; level < metadata.mipLevels; ++level)
-            {
-                for (size_t slice = 0; slice < d; ++slice)
-                {
-                    if (FAILED(process_image(info.fastpath, images[index], out, metadata)))
-                        throw true;
-                    ++index;
-                }
-
-                if (d > 1)
-                    d >>= 1;
-            }
-        }
-        break;
-
-        default: return E_FAIL;
-    }
-
-    return S_OK;
-}
-
 template<size_t N, typename It, typename T = typename std::iterator_traits<It>::value_type>
 std::array<std::vector<T>, N> split(It start, It end)
 {
@@ -523,11 +397,7 @@ libbsa::fo4::file pack_fo4dx_file(std::span<std::byte> data, bool compress)
     DirectX::ScratchImage image;
     DirectX::TexMetadata info;
 
-    const auto hr = DirectX::LoadFromDDSMemory(data.data(),
-                                               data.size(),
-                                               DirectX::DDS_FLAGS_BAD_DXTN_TAILS,
-                                               &info,
-                                               image);
+    const auto hr = DirectX::LoadFromDDSMemory(data.data(), data.size(), DirectX::DDS_FLAGS_NONE, &info, image);
 
     if (FAILED(hr))
         throw libbsa::exception("Failed to read file as DDS");
@@ -547,14 +417,13 @@ libbsa::fo4::file pack_fo4dx_file(std::span<std::byte> data, bool compress)
         if (img_chunk.empty())
             continue;
 
-        const auto ddsinfo = SaveDDSInfo(img_chunk, info);
-        auto vec           = std::vector<std::byte>{};
-        vec.resize(ddsinfo.required_size);
+        std::vector<std::byte> vec;
 
-        // UB, but works in practice
-        static_assert(sizeof(std::vector<uint8_t>) == sizeof(std::vector<std::byte>));
-        auto *rvec = reinterpret_cast<std::vector<uint8_t> *>(&vec);
-        SaveMips(img_chunk, info, rvec->begin(), ddsinfo);
+        for (const auto &img : img_chunk)
+        {
+            const auto pix = reinterpret_cast<std::byte *>(img.pixels);
+            vec.insert(vec.end(), pix, pix + img.slicePitch);
+        }
 
         libbsa::fo4::chunk chunk;
 
