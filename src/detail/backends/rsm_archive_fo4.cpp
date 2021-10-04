@@ -3,11 +3,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
 
+#include "DDS.h"
 #include "btu/bsa/detail/backends/archive.hpp"
 
 #include <DirectXTex.h>
 #include <bsa/fo4.hpp>
-#include <dds.h>
 
 namespace btu::bsa::detail {
 namespace libbsa = ::bsa;
@@ -369,12 +369,6 @@ _Use_decl_annotations_ HRESULT EncodeDDSHeader(const DirectX::TexMetadata &metad
 
     return S_OK;
 }
-struct SaveToDDSInfo
-{
-    size_t required_size;
-    bool fastpath;
-};
-
 template<size_t N, typename It, typename T = typename std::iterator_traits<It>::value_type>
 std::array<std::vector<T>, N> split(It start, It end)
 {
