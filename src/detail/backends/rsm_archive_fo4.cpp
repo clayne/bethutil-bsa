@@ -467,7 +467,9 @@ std::vector<std::byte> unpack_fo4dx_file(libbsa::fo4::file &file)
     {
         if (chunk.compressed())
             chunk.decompress();
-        res.insert(res.end(), chunk.as_bytes().begin(), chunk.as_bytes().end());
+
+        const auto bytes = chunk.as_bytes();
+        res.insert(res.end(), bytes.begin(), bytes.end());
     }
 
     return res;
