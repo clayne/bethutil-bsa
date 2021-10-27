@@ -2,9 +2,11 @@
 # Enable ALL the things! Except not really
 # misc-non-private-member-variables-in-classes: the options don't do anything
 Checks: "*,\
+  -cppcoreguidelines-macro-usage,\
   -google-readability-todo,\
   -google-readability-braces-around-statements,\
   -hicpp-braces-around-statements,\
+  -hicpp-signed-bitwise,\
   -readability-braces-around-statements,\
   -altera-*,\
   -fuchsia-*,\
@@ -58,7 +60,7 @@ CheckOptions:
   - key: 'readability-identifier-naming.ConstantCase'
     value: 'lower_case'
   - key: 'readability-identifier-naming.ConstantPrefix'
-    value: 'k'
+    value: 'k_'
   - key: 'readability-identifier-naming.ConstantMemberCase'
     value: 'lower_case'
   - key: 'readability-identifier-naming.ConstantParameterCase'
@@ -80,7 +82,7 @@ CheckOptions:
   - key: 'readability-identifier-naming.GlobalConstantCase'
     value: 'lower_case'
   - key: 'readability-identifier-naming.GlobalConstantPrefix'
-    value: 'k'
+    value: 'k_'
   - key: 'readability-identifier-naming.GlobalConstantPointerCase'
     value: 'lower_case'
   - key: 'readability-identifier-naming.GlobalFunctionCase'

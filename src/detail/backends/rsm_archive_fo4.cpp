@@ -14,11 +14,11 @@ namespace libbsa = ::bsa;
 
 // Copied from https://github.com/microsoft/DirectXTex/blob/master/DirectXTex/DirectXTexDDS.cpp#L558
 // Required as the function is private
-_Use_decl_annotations_ HRESULT EncodeDDSHeader(const DirectX::TexMetadata &metadata,
-                                               DirectX::DDS_FLAGS flags,
-                                               void *pDestination,
-                                               size_t maxsize,
-                                               size_t &required) noexcept
+_Use_decl_annotations_ auto encode_dds_header(const DirectX::TexMetadata &metadata,
+                                              DirectX::DDS_FLAGS flags,
+                                              void *p_destination,
+                                              size_t maxsize,
+                                              size_t &required) noexcept -> HRESULT
 {
     using namespace DirectX;
     if (!IsValid(metadata.format))
@@ -220,15 +220,15 @@ _Use_decl_annotations_ HRESULT EncodeDDSHeader(const DirectX::TexMetadata &metad
         required += sizeof(DDS_HEADER_DXT10);
     }
 
-    if (!pDestination)
+    if (!p_destination)
         return S_OK;
 
     if (maxsize < required)
         return E_NOT_SUFFICIENT_BUFFER;
 
-    *static_cast<uint32_t *>(pDestination) = DDS_MAGIC;
+    *static_cast<uint32_t *>(p_destination) = DDS_MAGIC;
 
-    auto header = reinterpret_cast<DDS_HEADER *>(static_cast<uint8_t *>(pDestination) + sizeof(uint32_t));
+    auto header = reinterpret_cast<DDS_HEADER *>(static_cast<uint8_t *>(p_destination) + sizeof(uint32_t));
     assert(header);
 
     memset(header, 0, sizeof(DDS_HEADER));
@@ -370,7 +370,7 @@ _Use_decl_annotations_ HRESULT EncodeDDSHeader(const DirectX::TexMetadata &metad
     return S_OK;
 }
 template<size_t N, typename It, typename T = typename std::iterator_traits<It>::value_type>
-std::array<std::vector<T>, N> split(It start, It end)
+auto split(It start, It end) -> std::array<std::vector<T>, N>
 {
     std::array<std::vector<T>, N> rtn;
     const size_t count = std::distance(start, end);
@@ -379,17 +379,17 @@ std::array<std::vector<T>, N> split(It start, It end)
     size_t limit   = std::ceil(static_cast<double>(count) / N);
     for (size_t i = 0; i < count; i += limit)
     {
-        rtn[out_idx] = std::vector(start + i, start + std::min<size_t>(i + limit, count));
+        rtn[out_idx] = std::vector(start + i, start + std::min<size_t>(i + limit, count)); // NOLINT
         out_idx++;
     }
 
     return rtn;
 }
 
-libbsa::fo4::file pack_fo4dx_file(std::span<std::byte> data, bool compress)
+auto pack_fo4dx_file(std::span<std::byte> data, bool compress) -> libbsa::fo4::file
 {
     DirectX::ScratchImage image;
-    DirectX::TexMetadata info;
+    DirectX::TexMetadata info{};
 
     const auto hr = DirectX::LoadFromDDSMemory(data.data(), data.size(), DirectX::DDS_FLAGS_NONE, &info, image);
 
@@ -406,7 +406,7 @@ libbsa::fo4::file pack_fo4dx_file(std::span<std::byte> data, bool compress)
     auto img_chunks = split<4>(image.GetImages(), image.GetImages() + image.GetImageCount());
 
     size_t cur_mip = 0;
-    for (auto img_chunk : img_chunks)
+    for (const auto &img_chunk : img_chunks)
     {
         if (img_chunk.empty())
             continue;
@@ -415,7 +415,7 @@ libbsa::fo4::file pack_fo4dx_file(std::span<std::byte> data, bool compress)
 
         for (const auto &img : img_chunk)
         {
-            const auto pix = reinterpret_cast<std::byte *>(img.pixels);
+            auto *const pix = reinterpret_cast<std::byte *>(img.pixels);
             vec.insert(vec.end(), pix, pix + img.slicePitch);
         }
 
@@ -434,7 +434,7 @@ libbsa::fo4::file pack_fo4dx_file(std::span<std::byte> data, bool compress)
     return file;
 }
 
-std::vector<std::byte> unpack_fo4dx_file(libbsa::fo4::file &file)
+auto unpack_fo4dx_file(libbsa::fo4::file &file) -> std::vector<std::byte>
 {
     const DirectX::TexMetadata info{
         .width     = file.header.width,
@@ -450,12 +450,12 @@ std::vector<std::byte> unpack_fo4dx_file(libbsa::fo4::file &file)
     DirectX::Blob header;
     // Magic + both headers
     header.Initialize(sizeof(uint32_t) + sizeof(DirectX::DDS_HEADER) + sizeof(DirectX::DDS_HEADER_DXT10));
-    size_t required;
-    const auto hr = EncodeDDSHeader(info,
-                                    DirectX::DDS_FLAGS_NONE,
-                                    header.GetBufferPointer(),
-                                    header.GetBufferSize(),
-                                    required);
+    size_t required = 0;
+    const auto hr   = encode_dds_header(info,
+                                      DirectX::DDS_FLAGS_NONE,
+                                      header.GetBufferPointer(),
+                                      header.GetBufferSize(),
+                                      required);
     if (FAILED(hr))
         throw libbsa::exception("DDS header encoding failed");
 
