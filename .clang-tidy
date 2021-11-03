@@ -2,21 +2,24 @@
 # Enable ALL the things! Except not really
 # misc-non-private-member-variables-in-classes: the options don't do anything
 Checks: "*,\
-  -cppcoreguidelines-macro-usage,\
-  -google-readability-todo,\
-  -google-readability-braces-around-statements,\
-  -hicpp-braces-around-statements,\
-  -hicpp-signed-bitwise,\
-  -readability-braces-around-statements,\
   -altera-*,\
+  -cppcoreguidelines-macro-usage,\
   -fuchsia-*,\
   fuchsia-multiple-inheritance,\
+  -google-readability-braces-around-statements,\
+  -google-readability-todo,\
+  -hicpp-braces-around-statements,\
+  -hicpp-signed-bitwise,\
   -llvm-header-guard,\
   -llvm-include-order,\
   -llvmlibc-*,\
-  -misc-non-private-member-variables-in-classes"
+  -misc-non-private-member-variables-in-classes",\
+  -readability-braces-around-statements,\
+  -readability-uppercase-literal-suffix
 WarningsAsErrors: ''
 CheckOptions:
+  - key: 'bugprone-argument-comment.StrictMode'
+    value: 'true'										   			   
 # Prefer using enum classes with 2 values for parameters instead of bools
   - key: 'bugprone-argument-comment.CommentBoolLiterals'
     value: 'true'
@@ -45,6 +48,8 @@ CheckOptions:
   - key: 'readability-qualified-auto.AddConstToQualified'
     value: 'true'
   - key: 'readability-redundant-access-specifiers.CheckFirstDeclaration'
+    value: 'true'
+  - key: 'readability-function-cognitive-complexity.IgnoreMacros'
     value: 'true'
 # Identifier styles
   - key: 'readability-identifier-naming.AbstractClassCase'
