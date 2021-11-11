@@ -1,0 +1,1125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<tagfile>
+  <compound kind="file">
+    <name>index.doxy</name>
+    <filename>index_8doxy.html</filename>
+  </compound>
+  <compound kind="file">
+    <name>bsa.hpp</name>
+    <filename>bsa_8hpp.html</filename>
+  </compound>
+  <compound kind="file">
+    <name>archive_data.hpp</name>
+    <filename>archive__data_8hpp.html</filename>
+    <includes id="archive__type_8hpp" name="archive_type.hpp" local="yes" imported="no">btu/bsa/detail/archive_type.hpp</includes>
+    <includes id="common_8hpp" name="common.hpp" local="yes" imported="no">btu/bsa/detail/common.hpp</includes>
+    <includes id="plugin_8hpp" name="plugin.hpp" local="yes" imported="no">btu/bsa/plugin.hpp</includes>
+    <includes id="settings_8hpp" name="settings.hpp" local="yes" imported="no">btu/bsa/settings.hpp</includes>
+    <class kind="class">btu::bsa::ArchiveData</class>
+    <class kind="struct">btu::bsa::ArchiveData::Size</class>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+  </compound>
+  <compound kind="file">
+    <name>c_api.h</name>
+    <filename>c__api_8h.html</filename>
+  </compound>
+  <compound kind="file">
+    <name>archive_type.hpp</name>
+    <filename>archive__type_8hpp.html</filename>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+    <member kind="enumeration">
+      <type></type>
+      <name>ArchiveType</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>aa9170613a5c5e212bfcc265682104d05</anchor>
+      <arglist></arglist>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="aa9170613a5c5e212bfcc265682104d05a536300d63028e7f16ba150566ecd3a5f">Textures</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="aa9170613a5c5e212bfcc265682104d05aeb6d8ae6f20283755b339c0dc273988b">Standard</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="aa9170613a5c5e212bfcc265682104d05a7d3fd181ccf56faf9e7d0ff8a217688e">Incompressible</enumvalue>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>ArchiveVersion</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a912a6da4521bfdd9233fd4c14a820922</anchor>
+      <arglist></arglist>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a37a98352f0e0d2f4d64e96fe334871ed">tes3</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a27069e6baf4eba0ad33686287d582c97">tes4</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a9251dddd50ef30adce51ad629526d447">fo3</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a305506069f2dda79d68e638186b83a5e">tes5</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a64192ca465194480a4621d6905dac5b7">sse</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a87caba376d6bd426a47d310a1f0926bd">fo4</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a1b196d66df9a6955dcd114291a3e4ec7">fo4dx</enumvalue>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>archive.hpp</name>
+    <filename>archive_8hpp.html</filename>
+    <includes id="archive__type_8hpp" name="archive_type.hpp" local="yes" imported="no">btu/bsa/detail/archive_type.hpp</includes>
+    <includes id="common_8hpp" name="common.hpp" local="yes" imported="no">btu/bsa/detail/common.hpp</includes>
+    <class kind="class">btu::bsa::detail::Archive</class>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+    <namespace>btu::bsa::detail</namespace>
+  </compound>
+  <compound kind="file">
+    <name>bsarch_archive.hpp</name>
+    <filename>bsarch__archive_8hpp.html</filename>
+    <includes id="archive_8hpp" name="archive.hpp" local="yes" imported="no">btu/bsa/detail/backends/archive.hpp</includes>
+    <class kind="class">btu::bsa::detail::BsarchArchive</class>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+    <namespace>btu::bsa::detail</namespace>
+    <member kind="function">
+      <type>bsa_archive_type_t</type>
+      <name>to_libbsarch_version</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>aaec006ed9b0de01ba2c1f0fe1cfd184d</anchor>
+      <arglist>(ArchiveVersion version)</arglist>
+    </member>
+    <member kind="function">
+      <type>ArchiveVersion</type>
+      <name>to_version</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a35eccb7fc4371e0c825a934fc93e35d7</anchor>
+      <arglist>(bsa_archive_type_t version)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>rsm_archive.hpp</name>
+    <filename>rsm__archive_8hpp.html</filename>
+    <includes id="archive_8hpp" name="archive.hpp" local="yes" imported="no">btu/bsa/detail/backends/archive.hpp</includes>
+    <class kind="class">btu::bsa::detail::RsmArchive</class>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+    <namespace>btu::bsa::detail</namespace>
+    <member kind="typedef">
+      <type>std::variant&lt; libbsa::tes3::archive, libbsa::tes4::archive, libbsa::fo4::archive &gt;</type>
+      <name>UnderlyingArchive</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a1ab530431a6a8434821ea90be40d3cd4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>std::variant&lt; libbsa::tes3::file, libbsa::tes4::file, libbsa::fo4::file &gt;</type>
+      <name>UnderlyingFile</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a4a32bf0c7351032c1d5235303c08bb62</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>virtual_to_local_path</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a99a02f35b52c7a728e261184fa916756</anchor>
+      <arglist>(Keys &amp;&amp;...a_keys) -&gt; std::string</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>get_archive_identifier</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a085f92ba28e5bfde75a9c60673e241b9</anchor>
+      <arglist>(const UnderlyingArchive &amp;archive) -&gt; std::string_view</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>archive_version</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>aa3fa51966b14bcecadb8750441feff51</anchor>
+      <arglist>(const UnderlyingArchive &amp;archive, Version a_version) -&gt; Version</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>common.hpp</name>
+    <filename>common_8hpp.html</filename>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+  </compound>
+  <compound kind="file">
+    <name>pack.hpp</name>
+    <filename>pack_8hpp.html</filename>
+    <includes id="archive__data_8hpp" name="archive_data.hpp" local="yes" imported="no">btu/bsa/archive_data.hpp</includes>
+    <includes id="common_8hpp" name="common.hpp" local="yes" imported="no">btu/bsa/detail/common.hpp</includes>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+    <member kind="typedef">
+      <type>std::function&lt; bool(const Path &amp;dir, fs::directory_entry const &amp;fileinfo)&gt;</type>
+      <name>AllowFilePred</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>aac3db12e795460c421116f8f483bfda5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>MergeSettings</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>affbcf0f8dc54c016def93a88289ff1dc</anchor>
+      <arglist></arglist>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="affbcf0f8dc54c016def93a88289ff1dcabf7b5fe749a502059d432ccaf7cb62ea">MergeTextures</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="affbcf0f8dc54c016def93a88289ff1dca1be79ca25d84563d4c6355e2bbc1f74e">MergeIncompressible</enumvalue>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>default_is_allowed_path</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a9d886065797fdeafdb8fa76c2efa46fb</anchor>
+      <arglist>(const Path &amp;dir, fs::directory_entry const &amp;fileinfo) -&gt; bool</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>BETHUTIL_MAKE_ALL_ENUM_OPERATORS</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a7b2a53d8207bacee96dd6fe0cbfdf65f</anchor>
+      <arglist>(MergeSettings)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>split</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a11fd67075d7ebb55797e2200b8cea6c6</anchor>
+      <arglist>(const Path &amp;dir, const Settings &amp;sets, const AllowFilePred &amp;allow_path_pred=default_is_allowed_path) -&gt; std::vector&lt; ArchiveData &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>merge</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a07e63c5eff82d34951135d8bf70fb744</anchor>
+      <arglist>(std::vector&lt; ArchiveData &gt; &amp;archives, MergeSettings sets=MergeSettings::MergeIncompressible|MergeSettings::MergeTextures)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>write</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>af7d5f15af924249631def2b6232c08a7</anchor>
+      <arglist>(bool compressed, ArchiveData &amp;&amp;data, const Settings &amp;sets, const Path &amp;root) -&gt; std::vector&lt; std::pair&lt; Path, std::string &gt;&gt;</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>plugin.hpp</name>
+    <filename>plugin_8hpp.html</filename>
+    <includes id="archive__type_8hpp" name="archive_type.hpp" local="yes" imported="no">btu/bsa/detail/archive_type.hpp</includes>
+    <includes id="common_8hpp" name="common.hpp" local="yes" imported="no">btu/bsa/detail/common.hpp</includes>
+    <includes id="settings_8hpp" name="settings.hpp" local="yes" imported="no">btu/bsa/settings.hpp</includes>
+    <class kind="class">btu::bsa::FilePath</class>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+    <member kind="function">
+      <type>auto</type>
+      <name>find_archive_name</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a27f66dfaf4051e4c0cb44615c90d4c2c</anchor>
+      <arglist>(const Path &amp;folder_path, const Settings &amp;sets, ArchiveType type) -&gt; FilePath</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>clean_dummy_plugins</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a19a21292b875df8feb8f7d96c77fa1a2</anchor>
+      <arglist>(const Path &amp;folder_path, const Settings &amp;sets)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>make_dummy_plugins</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a6863ee91a9a0870ac7755681275f9337</anchor>
+      <arglist>(const Path &amp;folder_path, const Settings &amp;sets)</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>settings.hpp</name>
+    <filename>settings_8hpp.html</filename>
+    <includes id="archive_8hpp" name="archive.hpp" local="yes" imported="no">btu/bsa/detail/backends/archive.hpp</includes>
+    <includes id="common_8hpp" name="common.hpp" local="yes" imported="no">btu/bsa/detail/common.hpp</includes>
+    <class kind="struct">btu::bsa::AllowedPath</class>
+    <class kind="struct">btu::bsa::Settings</class>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+    <namespace>btu::bsa::dummy</namespace>
+    <member kind="enumeration">
+      <type></type>
+      <name>FileTypes</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a8d402424047b46ac4d1a3ef0ca75f09a</anchor>
+      <arglist></arglist>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aaeb6d8ae6f20283755b339c0dc273988b">Standard</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aaa3e8ae43188ae76d38f414b2bdb0077b">Texture</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aa7d3fd181ccf56faf9e7d0ff8a217688e">Incompressible</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aa85fffe8f5074d606fa202fa5ae90d8bb">Blacklist</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aa409c1892b68cb394799262ac57f6d4f1">Plugin</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aa3c4107dba05635d12c5b7c340017b138">BSA</enumvalue>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>get_filetype</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a83ca3cb323d37d4bafa20c9221b2c9a7</anchor>
+      <arglist>(const Path &amp;filepath, const Path &amp;root, const Settings &amp;sets) -&gt; FileTypes</arglist>
+    </member>
+  </compound>
+  <compound kind="file">
+    <name>transform.hpp</name>
+    <filename>transform_8hpp.html</filename>
+  </compound>
+  <compound kind="file">
+    <name>unpack.hpp</name>
+    <filename>unpack_8hpp.html</filename>
+    <includes id="settings_8hpp" name="settings.hpp" local="yes" imported="no">btu/bsa/settings.hpp</includes>
+    <class kind="struct">btu::bsa::UnpackSettings</class>
+    <namespace>btu</namespace>
+    <namespace>btu::bsa</namespace>
+    <member kind="function">
+      <type>auto</type>
+      <name>open_virtual_path</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>acd0a7028e9324fda418f57fafa00d3f6</anchor>
+      <arglist>(const Path &amp;path) -&gt; std::ofstream</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>unpack</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>ad4b64e86fdf57025cd1f2abe428b2e4c</anchor>
+      <arglist>(UnpackSettings sets)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>unpack_all</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>abdf85730b1b71f379750a267a7e90d75</anchor>
+      <arglist>(const Path &amp;dir, const Path &amp;out, const Settings &amp;sets)</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>btu::bsa::AllowedPath</name>
+    <filename>structbtu_1_1bsa_1_1_allowed_path.html</filename>
+    <member kind="function">
+      <type>auto</type>
+      <name>check</name>
+      <anchorfile>structbtu_1_1bsa_1_1_allowed_path.html</anchorfile>
+      <anchor>a2efe1170d17ae6e22e7bc763b0a57de7</anchor>
+      <arglist>(const Path &amp;filepath, const Path &amp;root) const -&gt; bool</arglist>
+    </member>
+    <member kind="variable">
+      <type>std::u8string</type>
+      <name>extension</name>
+      <anchorfile>structbtu_1_1bsa_1_1_allowed_path.html</anchorfile>
+      <anchor>a5a9004f0901bbddfd3286cee87984a11</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::vector&lt; std::u8string &gt;</type>
+      <name>directories</name>
+      <anchorfile>structbtu_1_1bsa_1_1_allowed_path.html</anchorfile>
+      <anchor>a4fe8281548fc8829bc7c12f0e19f0784</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static const auto</type>
+      <name>k_root</name>
+      <anchorfile>structbtu_1_1bsa_1_1_allowed_path.html</anchorfile>
+      <anchor>a6fb1797646d1c24522cfd5d140ea85ef</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>btu::bsa::detail::Archive</name>
+    <filename>classbtu_1_1bsa_1_1detail_1_1_archive.html</filename>
+    <member kind="function" virtualness="pure">
+      <type>virtual auto</type>
+      <name>read</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>a397b25cc4be19aa7a1dc93e0ed55380a</anchor>
+      <arglist>(Path a_path) -&gt; ArchiveVersion=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>write</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>a1a98e99ea4d99e720239d76c3e4c42b3</anchor>
+      <arglist>(Path a_path)=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>a2d4531b9649950880787a80bfdae07e6</anchor>
+      <arglist>(const Path &amp;a_root, const Path &amp;a_path)=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>ab5d15c9d95c4b0818f18def152307640</anchor>
+      <arglist>(const Path &amp;a_relative, std::vector&lt; std::byte &gt; a_data)=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual auto</type>
+      <name>unpack</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>aac1783a47fe388cf2ecfdd893946c19f</anchor>
+      <arglist>(const Path &amp;out_path) -&gt; void=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual auto</type>
+      <name>get_version</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>af9a74484d488c9a46e865c4ddf22093e</anchor>
+      <arglist>() const noexcept -&gt; ArchiveVersion=0</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>btu::bsa::ArchiveData</name>
+    <filename>classbtu_1_1bsa_1_1_archive_data.html</filename>
+    <class kind="struct">btu::bsa::ArchiveData::Size</class>
+    <member kind="function">
+      <type></type>
+      <name>ArchiveData</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a9295fdfa170d5eba0dd8168c888eec0a</anchor>
+      <arglist>(const Settings &amp;sets, ArchiveType type)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a8417a4e1adc8337ab080b97ceb1a057a</anchor>
+      <arglist>(Path path, std::optional&lt; Size &gt; override=std::nullopt) -&gt; bool</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>get_type</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a2343f0d748b967f2fe49d5120a470c4d</anchor>
+      <arglist>() const -&gt; ArchiveType</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>get_version</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a19a5f565f22d3ffa38c34afcf7dd211b</anchor>
+      <arglist>() const -&gt; ArchiveVersion</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>empty</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a4f3e849f33b2b58615276444e194e6c3</anchor>
+      <arglist>() const -&gt; bool</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>begin</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a20d9b99d6e3faa4f20b104f08cd4511f</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>end</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>aae8061eeb4ca787e9739466a5b5f3fb4</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>find_name</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>abbf21acfd7368ffab1c703c51a218733</anchor>
+      <arglist>(const Path &amp;folder, const Settings &amp;sets) const -&gt; Path</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>size</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a3e3d370fdcbc0328d8846f1588cec810</anchor>
+      <arglist>() const -&gt; Size</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>max_size</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>ae605e5b0842b666ce1f6bfe738cba4f2</anchor>
+      <arglist>() const -&gt; uintmax_t</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>type</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a95182e012e26eaf7499edfb1863c35a3</anchor>
+      <arglist>() const -&gt; ArchiveType</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>operator+=</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>aad67c66ad07dda3f914f4f3aeb08b3b2</anchor>
+      <arglist>(const ArchiveData &amp;other) -&gt; ArchiveData &amp;</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>operator+</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a2c7381c4751eeb1417730ec777e11f09</anchor>
+      <arglist>(ArchiveData const &amp;other) const -&gt; ArchiveData</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>operator</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a3a8cd232387fffeeb009d57464496122</anchor>
+      <arglist>(const ArchiveData &amp;) const =default</arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static constexpr bool</type>
+      <name>merge_different_types</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>aed70eac4af47154253c2b927aaa04116</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static constexpr bool</type>
+      <name>separate_different_types</name>
+      <anchorfile>classbtu_1_1bsa_1_1_archive_data.html</anchorfile>
+      <anchor>a53a72b95bb095d3130d8d59e8a1becae</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>btu::bsa::detail::BsarchArchive</name>
+    <filename>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</filename>
+    <base>btu::bsa::detail::Archive</base>
+    <member kind="typedef">
+      <type>std::function&lt; void(const std::filesystem::path &amp;, std::span&lt; const std::byte &gt;)&gt;</type>
+      <name>iteration_callback</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>a9de676df2527921581a945d1dde0f6ee</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>BsarchArchive</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>ad6b25f883aba27acd070a0a492fb2443</anchor>
+      <arglist>(const std::filesystem::path &amp;a_path)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>BsarchArchive</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>aa6cd8632277b52c25aaa9f5b76961094</anchor>
+      <arglist>(ArchiveVersion a_version, bool a_compressed)</arglist>
+    </member>
+    <member kind="function">
+      <type>ArchiveVersion</type>
+      <name>read</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>aac840a551b7cc989facbb53809e8009a</anchor>
+      <arglist>(const std::filesystem::path &amp;a_path) override</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>write</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>af6e2e3cfdce563fcd5d7fe34736a9fd0</anchor>
+      <arglist>(std::filesystem::path a_path) override</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>a26c79a960800a0973c85c28bc189c3ca</anchor>
+      <arglist>(const std::filesystem::path &amp;a_root, const std::filesystem::path &amp;a_path) override</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>a49f853849bdcfea65203f11b0a628659</anchor>
+      <arglist>(const std::filesystem::path &amp;a_relative, std::vector&lt; std::byte &gt; a_data) override</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>iterate_files</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>aef11877c63e9f56c1daf66b358b9676d</anchor>
+      <arglist>(const iteration_callback &amp;a_callback, bool skip_compressed=false) override</arglist>
+    </member>
+    <member kind="function">
+      <type>ArchiveVersion</type>
+      <name>get_version</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>a45d67bfff248ff0211dd6a7cb8192af7</anchor>
+      <arglist>() const noexcept override</arglist>
+    </member>
+    <member kind="function">
+      <type>const libbsarch::bsa &amp;</type>
+      <name>get_archive</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_bsarch_archive.html</anchorfile>
+      <anchor>a7a6af26c4a28126391d4c06b01998742</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual auto</type>
+      <name>read</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>a397b25cc4be19aa7a1dc93e0ed55380a</anchor>
+      <arglist>(Path a_path) -&gt; ArchiveVersion=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>write</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>a1a98e99ea4d99e720239d76c3e4c42b3</anchor>
+      <arglist>(Path a_path)=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>a2d4531b9649950880787a80bfdae07e6</anchor>
+      <arglist>(const Path &amp;a_root, const Path &amp;a_path)=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual void</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>ab5d15c9d95c4b0818f18def152307640</anchor>
+      <arglist>(const Path &amp;a_relative, std::vector&lt; std::byte &gt; a_data)=0</arglist>
+    </member>
+    <member kind="function" virtualness="pure">
+      <type>virtual auto</type>
+      <name>unpack</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_archive.html</anchorfile>
+      <anchor>aac1783a47fe388cf2ecfdd893946c19f</anchor>
+      <arglist>(const Path &amp;out_path) -&gt; void=0</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>btu::bsa::FilePath</name>
+    <filename>classbtu_1_1bsa_1_1_file_path.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>FilePath</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>a6a6d67125a228422b14fd515b01e31ae</anchor>
+      <arglist>(Path dir, std::u8string name, std::u8string suffix, std::u8string ext, FileTypes type)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>full_path</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>a78eb9d61735ad2e5af79e7fa27c0417e</anchor>
+      <arglist>() const -&gt; Path</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>full_name</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>a279d9073a8a92b6b77758f178b735143</anchor>
+      <arglist>() const -&gt; Path</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static auto</type>
+      <name>make</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>a2b4a168c23646d29f358165bbf204018</anchor>
+      <arglist>(const Path &amp;path, const Settings &amp;sets, FileTypes type) -&gt; std::optional&lt; FilePath &gt;</arglist>
+    </member>
+    <member kind="variable">
+      <type>Path</type>
+      <name>dir</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>a593892091f4b45700b82acdf3960641f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::u8string</type>
+      <name>name</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>ac8cdc3a3abe4516645c42c32f582d09a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::u8string</type>
+      <name>suffix</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>aacdd602659270f92bb2a11557c01a661</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::u8string</type>
+      <name>ext</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>a541a150a16d70f2e044549e88637ef1c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::optional&lt; uint8_t &gt;</type>
+      <name>counter</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>a7015db38562a349d4cf56e93758e1f44</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>FileTypes</type>
+      <name>type</name>
+      <anchorfile>classbtu_1_1bsa_1_1_file_path.html</anchorfile>
+      <anchor>af9c6e54afb3538d46ce585f1b02651c4</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>btu::bsa::detail::RsmArchive</name>
+    <filename>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</filename>
+    <base>btu::bsa::detail::Archive</base>
+    <member kind="function">
+      <type></type>
+      <name>RsmArchive</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a322f1cc2e4125fafd8f43cf28ceba07d</anchor>
+      <arglist>(const Path &amp;a_path)</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>RsmArchive</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a4e582584ac85c6a890ca38313e6ca4cf</anchor>
+      <arglist>(ArchiveVersion a_version, bool a_compressed)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>read</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a3001930430f5f2cb466476d49a4e5757</anchor>
+      <arglist>(Path a_path) -&gt; ArchiveVersion override</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>write</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>af33dc7b566f339c48a66ca641458dace</anchor>
+      <arglist>(Path a_path) -&gt; void override</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a67d168b48839bddac8ee826dcb1c80c6</anchor>
+      <arglist>(const Path &amp;a_relative, UnderlyingFile file) -&gt; void</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a5cc7f4cb4474a1d1e54bbf2c4c3d0f3b</anchor>
+      <arglist>(const Path &amp;a_root, const Path &amp;a_path) -&gt; void override</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>add_file</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a81e91043abd43819df999d0eb7c6d1a4</anchor>
+      <arglist>(const Path &amp;a_relative, std::vector&lt; std::byte &gt; a_data) -&gt; void override</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual auto</type>
+      <name>unpack</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a7c6187e7108aee800b7ea1c120e3b0d6</anchor>
+      <arglist>(const Path &amp;out_path) -&gt; void override</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>get_version</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a7f3bd8aa0a140b0d2e75a7cfc9aa7f40</anchor>
+      <arglist>() const noexcept -&gt; ArchiveVersion override</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>get_archive</name>
+      <anchorfile>classbtu_1_1bsa_1_1detail_1_1_rsm_archive.html</anchorfile>
+      <anchor>a88f9271a5685a4de0362fd680fb4847b</anchor>
+      <arglist>() const noexcept -&gt; const UnderlyingArchive &amp;</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>btu::bsa::Settings</name>
+    <filename>structbtu_1_1bsa_1_1_settings.html</filename>
+    <member kind="function" static="yes">
+      <type>static auto</type>
+      <name>get</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>a437d8967acd8a25ced342cd931823289</anchor>
+      <arglist>(Game game) -&gt; const Settings &amp;</arglist>
+    </member>
+    <member kind="variable">
+      <type>Game</type>
+      <name>game</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>a8b2bef30eb8b874b944b444fc16ee056</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::uintmax_t</type>
+      <name>max_size</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>ab878b95a13b63f5c8cae440e8ccdf0fc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>ArchiveVersion</type>
+      <name>format</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>a474f4e18da4a795f5265525ab4d60b44</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::optional&lt; ArchiveVersion &gt;</type>
+      <name>texture_format</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>a1ce474ad94bd195fec6361b1e8b7c4e4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::optional&lt; std::u8string &gt;</type>
+      <name>suffix</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>a19b73ea38edc116bcb80d345e2ad1124</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::optional&lt; std::u8string &gt;</type>
+      <name>texture_suffix</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>a16bc631cff214ae7fcaedde8006494da</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::u8string</type>
+      <name>extension</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>a024fd96bdc3f09abeb24628b33ca9e9b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::vector&lt; std::u8string &gt;</type>
+      <name>plugin_extensions</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>adf75c178617fc91fc79e22b9888f8b37</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::optional&lt; std::vector&lt; uint8_t &gt; &gt;</type>
+      <name>s_dummy_plugin</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>ad9fa8218597e70f285c58c77cc829857</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::vector&lt; AllowedPath &gt;</type>
+      <name>standard_files</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>a0fff0a872314c000da9df845bf5bb97e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::vector&lt; AllowedPath &gt;</type>
+      <name>texture_files</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>af1df7201b2aed13f6e7a446bcbd832b0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>std::vector&lt; AllowedPath &gt;</type>
+      <name>incompressible_files</name>
+      <anchorfile>structbtu_1_1bsa_1_1_settings.html</anchorfile>
+      <anchor>ae613faa5eb8455346fb9aacccac4c1dd</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>btu::bsa::ArchiveData::Size</name>
+    <filename>structbtu_1_1bsa_1_1_archive_data_1_1_size.html</filename>
+    <member kind="function">
+      <type>auto</type>
+      <name>operator</name>
+      <anchorfile>structbtu_1_1bsa_1_1_archive_data_1_1_size.html</anchorfile>
+      <anchor>a38c5bd7bd2489afbf612cce68299e984</anchor>
+      <arglist>(const Size &amp;) const =default</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>operator+=</name>
+      <anchorfile>structbtu_1_1bsa_1_1_archive_data_1_1_size.html</anchorfile>
+      <anchor>ad98b95eeb8d0b5d5af4cb38591e263d9</anchor>
+      <arglist>(const Size &amp;other) -&gt; Size &amp;</arglist>
+    </member>
+    <member kind="variable">
+      <type>uintmax_t</type>
+      <name>compressed</name>
+      <anchorfile>structbtu_1_1bsa_1_1_archive_data_1_1_size.html</anchorfile>
+      <anchor>a1f58fe161fbd76e3594b7fd8d4b292a0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>uintmax_t</type>
+      <name>uncompressed</name>
+      <anchorfile>structbtu_1_1bsa_1_1_archive_data_1_1_size.html</anchorfile>
+      <anchor>aecd88f2e371b7a52d0dca1956c8bb214</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>btu::bsa::UnpackSettings</name>
+    <filename>structbtu_1_1bsa_1_1_unpack_settings.html</filename>
+    <member kind="variable">
+      <type>const Path &amp;</type>
+      <name>file_path</name>
+      <anchorfile>structbtu_1_1bsa_1_1_unpack_settings.html</anchorfile>
+      <anchor>a317e44812ff22d5fe57c6b4fe7dd0767</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>remove_arch</name>
+      <anchorfile>structbtu_1_1bsa_1_1_unpack_settings.html</anchorfile>
+      <anchor>ab0ab549dcf3b2ea37a5c9f017c1fb892</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>overwrite_existing_files</name>
+      <anchorfile>structbtu_1_1bsa_1_1_unpack_settings.html</anchorfile>
+      <anchor>a39d17e6b6c2f4dc6c1b705812cf4e1f5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>const Path *</type>
+      <name>root_opt</name>
+      <anchorfile>structbtu_1_1bsa_1_1_unpack_settings.html</anchorfile>
+      <anchor>aafbd49d1d600fefd9ff72b8bf5a0e72d</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="namespace">
+    <name>btu</name>
+    <filename>namespacebtu.html</filename>
+    <namespace>btu::bsa</namespace>
+  </compound>
+  <compound kind="namespace">
+    <name>btu::bsa</name>
+    <filename>namespacebtu_1_1bsa.html</filename>
+    <namespace>btu::bsa::detail</namespace>
+    <namespace>btu::bsa::dummy</namespace>
+    <class kind="struct">btu::bsa::AllowedPath</class>
+    <class kind="class">btu::bsa::ArchiveData</class>
+    <class kind="class">btu::bsa::FilePath</class>
+    <class kind="struct">btu::bsa::Settings</class>
+    <class kind="struct">btu::bsa::UnpackSettings</class>
+    <member kind="typedef">
+      <type>std::function&lt; bool(const Path &amp;dir, fs::directory_entry const &amp;fileinfo)&gt;</type>
+      <name>AllowFilePred</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>aac3db12e795460c421116f8f483bfda5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>MergeSettings</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>affbcf0f8dc54c016def93a88289ff1dc</anchor>
+      <arglist></arglist>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="affbcf0f8dc54c016def93a88289ff1dcabf7b5fe749a502059d432ccaf7cb62ea">MergeTextures</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="affbcf0f8dc54c016def93a88289ff1dca1be79ca25d84563d4c6355e2bbc1f74e">MergeIncompressible</enumvalue>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>FileTypes</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a8d402424047b46ac4d1a3ef0ca75f09a</anchor>
+      <arglist></arglist>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aaeb6d8ae6f20283755b339c0dc273988b">Standard</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aaa3e8ae43188ae76d38f414b2bdb0077b">Texture</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aa7d3fd181ccf56faf9e7d0ff8a217688e">Incompressible</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aa85fffe8f5074d606fa202fa5ae90d8bb">Blacklist</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aa409c1892b68cb394799262ac57f6d4f1">Plugin</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a8d402424047b46ac4d1a3ef0ca75f09aa3c4107dba05635d12c5b7c340017b138">BSA</enumvalue>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>ArchiveType</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>aa9170613a5c5e212bfcc265682104d05</anchor>
+      <arglist></arglist>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="aa9170613a5c5e212bfcc265682104d05a536300d63028e7f16ba150566ecd3a5f">Textures</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="aa9170613a5c5e212bfcc265682104d05aeb6d8ae6f20283755b339c0dc273988b">Standard</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="aa9170613a5c5e212bfcc265682104d05a7d3fd181ccf56faf9e7d0ff8a217688e">Incompressible</enumvalue>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>ArchiveVersion</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a912a6da4521bfdd9233fd4c14a820922</anchor>
+      <arglist></arglist>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a37a98352f0e0d2f4d64e96fe334871ed">tes3</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a27069e6baf4eba0ad33686287d582c97">tes4</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a9251dddd50ef30adce51ad629526d447">fo3</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a305506069f2dda79d68e638186b83a5e">tes5</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a64192ca465194480a4621d6905dac5b7">sse</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a87caba376d6bd426a47d310a1f0926bd">fo4</enumvalue>
+      <enumvalue file="namespacebtu_1_1bsa.html" anchor="a912a6da4521bfdd9233fd4c14a820922a1b196d66df9a6955dcd114291a3e4ec7">fo4dx</enumvalue>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>default_is_allowed_path</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a9d886065797fdeafdb8fa76c2efa46fb</anchor>
+      <arglist>(const Path &amp;dir, fs::directory_entry const &amp;fileinfo) -&gt; bool</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>BETHUTIL_MAKE_ALL_ENUM_OPERATORS</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a7b2a53d8207bacee96dd6fe0cbfdf65f</anchor>
+      <arglist>(MergeSettings)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>split</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a11fd67075d7ebb55797e2200b8cea6c6</anchor>
+      <arglist>(const Path &amp;dir, const Settings &amp;sets, const AllowFilePred &amp;allow_path_pred=default_is_allowed_path) -&gt; std::vector&lt; ArchiveData &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>merge</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a07e63c5eff82d34951135d8bf70fb744</anchor>
+      <arglist>(std::vector&lt; ArchiveData &gt; &amp;archives, MergeSettings sets=MergeSettings::MergeIncompressible|MergeSettings::MergeTextures)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>write</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>af7d5f15af924249631def2b6232c08a7</anchor>
+      <arglist>(bool compressed, ArchiveData &amp;&amp;data, const Settings &amp;sets, const Path &amp;root) -&gt; std::vector&lt; std::pair&lt; Path, std::string &gt;&gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>find_archive_name</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a27f66dfaf4051e4c0cb44615c90d4c2c</anchor>
+      <arglist>(const Path &amp;folder_path, const Settings &amp;sets, ArchiveType type) -&gt; FilePath</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>clean_dummy_plugins</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a19a21292b875df8feb8f7d96c77fa1a2</anchor>
+      <arglist>(const Path &amp;folder_path, const Settings &amp;sets)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>make_dummy_plugins</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a6863ee91a9a0870ac7755681275f9337</anchor>
+      <arglist>(const Path &amp;folder_path, const Settings &amp;sets)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>get_filetype</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>a83ca3cb323d37d4bafa20c9221b2c9a7</anchor>
+      <arglist>(const Path &amp;filepath, const Path &amp;root, const Settings &amp;sets) -&gt; FileTypes</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>open_virtual_path</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>acd0a7028e9324fda418f57fafa00d3f6</anchor>
+      <arglist>(const Path &amp;path) -&gt; std::ofstream</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>unpack</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>ad4b64e86fdf57025cd1f2abe428b2e4c</anchor>
+      <arglist>(UnpackSettings sets)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>unpack_all</name>
+      <anchorfile>namespacebtu_1_1bsa.html</anchorfile>
+      <anchor>abdf85730b1b71f379750a267a7e90d75</anchor>
+      <arglist>(const Path &amp;dir, const Path &amp;out, const Settings &amp;sets)</arglist>
+    </member>
+  </compound>
+  <compound kind="namespace">
+    <name>btu::bsa::detail</name>
+    <filename>namespacebtu_1_1bsa_1_1detail.html</filename>
+    <class kind="class">btu::bsa::detail::Archive</class>
+    <class kind="class">btu::bsa::detail::BsarchArchive</class>
+    <class kind="class">btu::bsa::detail::RsmArchive</class>
+    <member kind="typedef">
+      <type>std::variant&lt; libbsa::tes3::archive, libbsa::tes4::archive, libbsa::fo4::archive &gt;</type>
+      <name>UnderlyingArchive</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a1ab530431a6a8434821ea90be40d3cd4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>std::variant&lt; libbsa::tes3::file, libbsa::tes4::file, libbsa::fo4::file &gt;</type>
+      <name>UnderlyingFile</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a4a32bf0c7351032c1d5235303c08bb62</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>bsa_archive_type_t</type>
+      <name>to_libbsarch_version</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>aaec006ed9b0de01ba2c1f0fe1cfd184d</anchor>
+      <arglist>(ArchiveVersion version)</arglist>
+    </member>
+    <member kind="function">
+      <type>ArchiveVersion</type>
+      <name>to_version</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a35eccb7fc4371e0c825a934fc93e35d7</anchor>
+      <arglist>(bsa_archive_type_t version)</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>virtual_to_local_path</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a99a02f35b52c7a728e261184fa916756</anchor>
+      <arglist>(Keys &amp;&amp;...a_keys) -&gt; std::string</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>get_archive_identifier</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>a085f92ba28e5bfde75a9c60673e241b9</anchor>
+      <arglist>(const UnderlyingArchive &amp;archive) -&gt; std::string_view</arglist>
+    </member>
+    <member kind="function">
+      <type>auto</type>
+      <name>archive_version</name>
+      <anchorfile>namespacebtu_1_1bsa_1_1detail.html</anchorfile>
+      <anchor>aa3fa51966b14bcecadb8750441feff51</anchor>
+      <arglist>(const UnderlyingArchive &amp;archive, Version a_version) -&gt; Version</arglist>
+    </member>
+  </compound>
+  <compound kind="namespace">
+    <name>btu::bsa::dummy</name>
+    <filename>namespacebtu_1_1bsa_1_1dummy.html</filename>
+  </compound>
+  <compound kind="page">
+    <name>index</name>
+    <title>bethutil-bsa</title>
+    <filename>index</filename>
+  </compound>
+</tagfile>
