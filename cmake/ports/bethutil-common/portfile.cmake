@@ -3,7 +3,7 @@ vcpkg_from_github(
   OUT_SOURCE_PATH
   SOURCE_PATH
   REPO
-  Guekka/bethutil-bsa
+  Guekka/bethutil-common
   REF
   c752906f7738dd207d98dec997a30148a1ceba4c
   SHA512
@@ -14,7 +14,7 @@ vcpkg_from_github(
 vcpkg_cmake_configure(SOURCE_PATH "${SOURCE_PATH}" OPTIONS -DBUILD_TESTING=OFF)
 vcpkg_cmake_install()
 vcpkg_copy_pdbs()
-vcpkg_cmake_config_fixup(CONFIG_PATH "lib/cmake/bethutil-bsa")
+vcpkg_cmake_config_fixup(CONFIG_PATH "lib/cmake/bethutil-common")
 
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include"
      "${CURRENT_PACKAGES_DIR}/debug/share")

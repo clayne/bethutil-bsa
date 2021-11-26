@@ -1,5 +1,5 @@
 {
-  "name": "bethutil-bsa",
+  "name": "bethutil-common",
   "version-semver": "0.1.0",
   "description": "Common utilities for bethutil",
   "homepage": "https://github.com/Guekka/bethutil-bsa",
