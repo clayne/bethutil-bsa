@@ -1,7 +1,7 @@
 {
   "configurePresets": [
     {
-      "binaryDir": "build",
+      "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "BETHUTIL-BSA_BUILD_DOCS": {
           "type": "BOOL",
@@ -31,6 +31,14 @@
         "CMAKE_TOOLCHAIN_FILE": {
           "type": "STRING",
           "value": "$env{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake"
+        },
+        "VCPKG_MANIFEST_NO_DEFAULT_FEATURES": {
+          "type": "BOOL",
+          "value": "ON"
+        },
+        "VCPKG_OVERLAY_PORTS": {
+          "type": "STRING",
+          "value": "${sourceDir}/cmake/ports"
         }
       },
       "hidden": true,
@@ -45,6 +53,10 @@
         "CMAKE_MSVC_RUNTIME_LIBRARY": {
           "type": "STRING",
           "value": "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL"
+        },
+        "VCPKG_MANIFEST_FEATURES": {
+          "type": "STRING",
+          "value": ""
         },
         "VCPKG_TARGET_TRIPLET": {
           "type": "STRING",
@@ -68,6 +80,10 @@
           "type": "BOOL",
           "value": "ON"
         },
+        "VCPKG_MANIFEST_FEATURES": {
+          "type": "STRING",
+          "value": ""
+        },
         "VCPKG_TARGET_TRIPLET": {
           "type": "STRING",
           "value": "x64-linux"
@@ -77,18 +93,10 @@
       "name": "linux"
     },
     {
-      "cacheVariables": {
-        "CMAKE_CXX_FLAGS": "/EHsc /MP /W4 /WX /external:anglebrackets /external:W0"
+      "architecture": {
+        "strategy": "set",
+        "value": "x64"
       },
-      "generator": "Visual Studio 16 2019",
-      "inherits": [
-        "cmake-dev",
-        "vcpkg",
-        "windows"
-      ],
-      "name": "vs2019-windows-vcpkg"
-    },
-    {
       "cacheVariables": {
         "CMAKE_CXX_FLAGS": "/EHsc /MP /W4 /WX"
       },
@@ -98,17 +106,30 @@
         "vcpkg",
         "windows"
       ],
-      "name": "vs2022-windows-vcpkg",
+      "name": "vs2022-windows",
       "toolset": "v143"
+    },
+    {
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "/EHsc /MP /W4 /WX /external:anglebrackets /external:W0"
+      },
+      "generator": "Ninja",
+      "inherits": [
+        "cmake-dev",
+        "vcpkg",
+        "windows"
+      ],
+      "name": "ninja-windows"
     },
     {
       "generator": "Ninja",
       "inherits": [
         "cmake-dev",
-        "linux"
+        "linux",
+        "vcpkg"
       ],
-      "name": "ninja-linux-apt"
+      "name": "ninja-linux"
     }
   ],
-  "version": 2
+  "version": 3
 }
